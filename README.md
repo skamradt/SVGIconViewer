@@ -23,6 +23,22 @@ You can also support my work by buying me a coffee.
 
 [<img src="./images/buymeacoffee.svg"/>](https://buymeacoffee.com/skamradt)
 
+## Installation
+
+You can either download the source and compile using Delphi 12.0 or greater, OR download the latest [release](https://github.com/skamradt/SVGIconViewer/releases) zip file
+and extract all contents to the location of your choosing.
+
+## Usage
+
+The Icons along the top are
+
+| ![library](./images/library.svg) |When pressed with the mouse will display the list of collections available in the library.|
+| ![outline](./images/iconoutline.svg) | When pressed will show the outlined icon subset in the collection |
+| ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
+| ![twotone](./images/iconTwoTone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
+| Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
+| ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
+
 ## Contributing
 
 Contributions are welcome!
@@ -37,6 +53,6 @@ See the LICENSE file for details.
 
 This project makes use of the [TControlList](https://docwiki.embarcadero.com/RADStudio/Athens/en/10.4_Sydney_-_Release_2#New_VCL_TControlList_Control)
 component released in Delphi 10.4.2 as well as the [Skia4Delphi](https://docwiki.embarcadero.com/RADStudio/Athens/en/Skia4Delphi) released with Delphi 12.
+Because the program makes heavy use of multi-line strings, the project requires Delphi 12.0 or better to build.
 
-It may be possible to compile this project using Delphi 10.4 along with the public repository of
-[Skia4Delphi](https://github.com/skia4delphi/skia4delphi) however the suggested target is Delphi 12.
+
