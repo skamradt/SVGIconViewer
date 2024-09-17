@@ -14,7 +14,7 @@ const
 
 type
   TForm4 = class(TForm)
-    Panel1: TPanel;
+    pnlToolbar: TPanel;
     ControlList1: TControlList;
     svgIcon: TSkSvg;
     pnlRegular: TPanel;
@@ -56,6 +56,7 @@ type
     svgSelectLibrary: TSkSvg;
     Shape3: TShape;
     pmLibrary: TPopupMenu;
+    pnlSearchInfo: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure svgRegularClick(Sender: TObject);
     procedure svgFilledClick(Sender: TObject);

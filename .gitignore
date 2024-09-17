@@ -29,8 +29,8 @@
 # Default Delphi compiler directories
 # Content of this directories are generated with each Compile/Construct of a project.
 # Most of the time, files here have not there place in a code repository.
-#Win32/
-#Win64/
+Win32/
+Win64/
 #OSX64/
 #OSXARM64/
 #Android/

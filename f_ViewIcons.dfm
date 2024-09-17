@@ -15,7 +15,7 @@ object Form4: TForm4
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   TextHeight = 15
-  object Panel1: TPanel
+  object pnlToolbar: TPanel
     Left = 0
     Top = 0
     Width = 784
@@ -23,61 +23,9 @@ object Form4: TForm4
     Margins.Top = 0
     Align = alTop
     BevelOuter = bvNone
-    Caption = 'Panel1'
+    Caption = 'pnlToolbar'
     ShowCaption = False
     TabOrder = 0
-    object lblAvailableIconsCaption: TLabel
-      Left = 201
-      Top = 0
-      Width = 89
-      Height = 17
-      Caption = 'Available Icons:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Shape1: TShape
-      AlignWithMargins = True
-      Left = 195
-      Top = 3
-      Width = 2
-      Height = 39
-      Align = alLeft
-      Pen.Color = clSilver
-      ExplicitLeft = 138
-      ExplicitTop = 0
-      ExplicitHeight = 45
-    end
-    object lblAvailableIconCount: TLabel
-      Left = 296
-      Top = 0
-      Width = 36
-      Height = 17
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = '00000'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Shape2: TShape
-      AlignWithMargins = True
-      Left = 337
-      Top = 3
-      Width = 2
-      Height = 39
-      Margins.Left = 137
-      Align = alLeft
-      Pen.Color = clSilver
-      ExplicitLeft = 532
-      ExplicitTop = 6
-    end
     object Shape3: TShape
       AlignWithMargins = True
       Left = 49
@@ -421,15 +369,6 @@ object Form4: TForm4
         ExplicitWidth = 40
       end
     end
-    object SearchBox1: TSearchBox
-      Left = 201
-      Top = 19
-      Width = 131
-      Height = 23
-      TabOrder = 4
-      TextHint = 'Name Search'
-      OnInvokeSearch = SearchBox1InvokeSearch
-    end
     object pnlBackColor: TPanel
       AlignWithMargins = True
       Left = 695
@@ -440,7 +379,7 @@ object Form4: TForm4
       BevelKind = bkSoft
       BevelOuter = bvNone
       ShowCaption = False
-      TabOrder = 5
+      TabOrder = 4
       StyleElements = [seFont, seBorder]
       OnClick = ClickBackColor
       object svgBackColor: TSkSvg
@@ -502,7 +441,7 @@ object Form4: TForm4
       BevelOuter = bvNone
       PopupMenu = pmFill
       ShowCaption = False
-      TabOrder = 6
+      TabOrder = 5
       StyleElements = [seFont, seBorder]
       OnClick = ClickFillColor
       object svgFillColor: TSkSvg
@@ -563,7 +502,7 @@ object Form4: TForm4
       BevelKind = bkSoft
       BevelOuter = bvNone
       ShowCaption = False
-      TabOrder = 7
+      TabOrder = 6
       Visible = False
       StyleElements = [seFont, seBorder]
       OnClick = ClickToneColor
@@ -625,7 +564,7 @@ object Form4: TForm4
       BevelOuter = bvNone
       ParentBackground = False
       ShowCaption = False
-      TabOrder = 8
+      TabOrder = 7
       StyleElements = [seFont, seBorder]
       object svgSelectLibrary: TSkSvg
         Left = 0
@@ -655,6 +594,75 @@ object Form4: TForm4
         ExplicitHeight = 31
       end
     end
+    object pnlSearchInfo: TPanel
+      Left = 192
+      Top = 1
+      Width = 151
+      Height = 41
+      BevelOuter = bvNone
+      Caption = 'pnlSearchInfo'
+      ShowCaption = False
+      TabOrder = 8
+      object lblAvailableIconCount: TLabel
+        Left = 105
+        Top = -1
+        Width = 35
+        Height = 17
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = '00000'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblAvailableIconsCaption: TLabel
+        Left = 10
+        Top = -1
+        Width = 89
+        Height = 17
+        Caption = 'Available Icons:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Shape1: TShape
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 2
+        Height = 35
+        Align = alLeft
+        Pen.Color = clSilver
+        ExplicitLeft = 219
+        ExplicitHeight = 39
+      end
+      object Shape2: TShape
+        AlignWithMargins = True
+        Left = 146
+        Top = 3
+        Width = 2
+        Height = 35
+        Align = alRight
+        Pen.Color = clSilver
+        ExplicitLeft = 361
+        ExplicitHeight = 39
+      end
+      object SearchBox1: TSearchBox
+        Left = 10
+        Top = 17
+        Width = 131
+        Height = 23
+        TabOrder = 0
+        TextHint = 'Name Search'
+        OnInvokeSearch = SearchBox1InvokeSearch
+      end
+    end
   end
   object ControlList1: TControlList
     AlignWithMargins = True
@@ -682,6 +690,8 @@ object Form4: TForm4
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
+    ExplicitLeft = -2
+    ExplicitTop = 44
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
