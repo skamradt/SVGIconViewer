@@ -31,13 +31,15 @@ and extract all contents to the location of your choosing.
 ## Usage
 
 The Icons along the top are
-
-| ![library](./images/library.svg) |When pressed with the mouse will display the list of collections available in the library.|
-| ![outline](./images/iconoutline.svg) | When pressed will show the outlined icon subset in the collection |
-| ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
-| ![twotone](./images/iconTwoTone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
-| Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
-| ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
+ 
+ | icon | description |
+ | ---- | ----------- |
+ | ![library](./images/library.svg) |When pressed with the mouse will display the list of collections available in the library.|
+ | ![outline](./images/iconoutline.svg) | When pressed will show the outlined icon subset in the collection |
+ | ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
+ | ![twotone](./images/icontwotone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
+ | Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
+ | ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
 
 ## Contributing
 
