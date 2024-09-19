@@ -8,7 +8,7 @@ uses
   svgViewer.Types;
 
 type
-  TSearchIconList = class(TInterfacedObject,ISVGIconList,ISVGSearchList,ISVGTwoToneIconList)
+  TSearchIconList = class(TInterfacedObject,ISVGIconList,ISVGSearchList,ISVGTwoToneIconList,ISVGUserFolderList)
   private
     fFillColor : TColor;
     fToneColor : TColor;
@@ -27,6 +27,8 @@ type
     procedure SetBaseList(value : ISVGIconLIst);
     function GetToneColor : TColor;
     procedure SetToneColor(Value:TColor);
+    procedure SetDirectory(value:String);
+    function GetDirectory:string;
   public
     property Count : integer read GetCount;
     property Name[index:integer] : string read GetName;
@@ -58,6 +60,15 @@ begin
     result := fBaseList.count
   else
     Result := Length(fMatch);
+end;
+
+function TSearchIconList.GetDirectory: string;
+var
+  FolderList : ISVGUserFolderList;
+begin
+  Result := '';
+  if Supports(fBaseList,ISVGUserFolderList,FolderList) then
+    result := FolderList.Directory;
 end;
 
 function TSearchIconList.GetFillColor: TColor;
@@ -100,6 +111,14 @@ begin
   if Supports(fBaseList,ISVGTwoToneIconList,IconTone) then
     IconTone.ToneColor := fToneColor;
   SetSearchText(fSearchText);
+end;
+
+procedure TSearchIconList.SetDirectory(value: String);
+var
+  FolderList : ISVGUserFolderList;
+begin
+  if Supports(fBaseList,ISVGUserFolderList,FolderList) then
+    Folderlist.Directory := value;
 end;
 
 procedure TSearchIconList.SetFillColor(Value: TColor);

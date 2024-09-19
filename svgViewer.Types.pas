@@ -40,14 +40,19 @@ type
     property SearchText : string read GetSearchText write SetSearchText;
   end;
 
+  ISVGUserFolderList = interface
+    ['{69B3C6BF-21F1-452C-ABE1-ACE395E0A88A}']
+    procedure SetDirectory(value:String);
+    function GetDirectory:string;
+    property Directory : string read GetDirectory write SetDirectory;
+  end;
+
   ISVGLibraryCollection = interface
     ['{EF2D4AFF-137E-4382-8B28-BE5702A4BD7E}']
     Function GetLibraryName : string;
-    Function GetBaseSize : integer;
     Function GetTypesAvailable : TSVGIconListTypes;
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
     property Name : string read GetLibraryName;
-    property Size : integer read GetBaseSize;
     property Available : TSVGIconListTypes read GetTypesAvailable;
     property List[index:TSVGIconListType] : ISVGIconList read GetList;
   end;

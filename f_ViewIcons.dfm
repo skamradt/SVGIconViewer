@@ -371,7 +371,7 @@ object Form4: TForm4
     end
     object pnlBackColor: TPanel
       AlignWithMargins = True
-      Left = 695
+      Left = 649
       Top = 3
       Width = 40
       Height = 39
@@ -382,6 +382,7 @@ object Form4: TForm4
       TabOrder = 4
       StyleElements = [seFont, seBorder]
       OnClick = ClickBackColor
+      ExplicitLeft = 695
       object svgBackColor: TSkSvg
         Left = 0
         Top = 0
@@ -432,7 +433,7 @@ object Form4: TForm4
     end
     object pnlFillColor: TPanel
       AlignWithMargins = True
-      Left = 603
+      Left = 557
       Top = 3
       Width = 40
       Height = 39
@@ -444,6 +445,7 @@ object Form4: TForm4
       TabOrder = 5
       StyleElements = [seFont, seBorder]
       OnClick = ClickFillColor
+      ExplicitLeft = 603
       object svgFillColor: TSkSvg
         Left = 0
         Top = 0
@@ -494,7 +496,7 @@ object Form4: TForm4
     end
     object pnlToneColor: TPanel
       AlignWithMargins = True
-      Left = 649
+      Left = 603
       Top = 3
       Width = 40
       Height = 39
@@ -506,6 +508,7 @@ object Form4: TForm4
       Visible = False
       StyleElements = [seFont, seBorder]
       OnClick = ClickToneColor
+      ExplicitLeft = 649
       object svgToneColor: TSkSvg
         Left = 0
         Top = 0
@@ -661,6 +664,49 @@ object Form4: TForm4
         TabOrder = 0
         TextHint = 'Name Search'
         OnInvokeSearch = SearchBox1InvokeSearch
+      end
+    end
+    object pnlImageCollection: TPanel
+      AlignWithMargins = True
+      Left = 695
+      Top = 3
+      Width = 40
+      Height = 39
+      Align = alRight
+      BevelKind = bkSoft
+      BevelOuter = bvNone
+      ShowCaption = False
+      TabOrder = 9
+      StyleElements = [seFont, seBorder]
+      object svgImageCollection: TSkSvg
+        Left = 0
+        Top = 0
+        Width = 36
+        Height = 35
+        Hint = 'Copy as TImageCollection to Clipboard'
+        Align = alClient
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = ClickGenerateCollection
+        Svg.Source = 
+          '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><pat' +
+          'h d="M11.5 7.5C12.0523 7.5 12.5 7.05228 12.5 6.5C12.5 5.94772 12' +
+          '.0523 5.5 11.5 5.5C10.9477 5.5 10.5 5.94772 10.5 6.5C10.5 7.0522' +
+          '8 10.9477 7.5 11.5 7.5ZM3 6C3 4.34315 4.34315 3 6 3H12C13.6569 3' +
+          ' 15 4.34315 15 6V12C15 13.6569 13.6569 15 12 15H6C4.34315 15 3 1' +
+          '3.6569 3 12V6ZM6 4C4.89543 4 4 4.89543 4 6V12C4 12.3709 4.10096 ' +
+          '12.7182 4.27691 13.016L7.58576 9.70712C8.36681 8.92608 9.63314 8' +
+          '.92608 10.4142 9.70712L13.7231 13.016C13.899 12.7182 14 12.3709 ' +
+          '14 12V6C14 4.89543 13.1046 4 12 4H6ZM9.70708'#13#10' 10.4142C9.31656 1' +
+          '0.0237 8.68339 10.0237 8.29287 10.4142L4.98401 13.7231C5.28177 1' +
+          '3.899 5.62909 14 6 14H12C12.3709 14 12.7182 13.899 13.016 13.723' +
+          '1L9.70708 10.4142ZM8.00002 17C7.11152 17 6.31324 16.6138 5.76392' +
+          ' 16H12.5C14.3122 16 15.8027 14.6228 15.982 12.8579C15.9939 12.74' +
+          '02 16 12.6208 16 12.5V5.76392C16.6138 6.31324 17 7.11152 17 8.00' +
+          '002V12.5C17 14.9853 14.9853 17 12.5 17H8.00002Z"/></svg>'
+        ExplicitLeft = 3
+        ExplicitTop = 3
+        ExplicitWidth = 40
       end
     end
   end

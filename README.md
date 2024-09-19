@@ -32,14 +32,15 @@ and extract all contents to the location of your choosing.
 
 The Icons along the top are
  
- | icon | description |
- | ---- | ----------- |
- | ![library](./images/library.svg) |When pressed with the mouse will display the list of collections available in the library.|
- | ![outline](./images/iconoutline.svg) | When pressed will show the outlined icon subset in the collection |
- | ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
- | ![twotone](./images/icontwotone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
- | Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
- | ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
+| icon | description |
+| :---: | :--- |
+| ![library](./images/library.svg) |When pressed with the mouse will display the list of collections available in the library.|
+| ![outline](./images/iconoutline.svg) | When pressed will show the outlined icon subset in the collection. This is the only option available for the `user specified folder` option. |
+| ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
+| ![twotone](./images/icontwotone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
+| Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
+| ![generate](./icongeneratecomponent.svg) | Only available when a user directory is selected from the library.  This button will generate a TImageCollection containing all images in the current directory as PNG files with the size specified from the config screen. |
+| ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
 
 ## Contributing
 
@@ -55,6 +56,16 @@ See the LICENSE file for details.
 
 This project makes use of the [TControlList](https://docwiki.embarcadero.com/RADStudio/Athens/en/10.4_Sydney_-_Release_2#New_VCL_TControlList_Control)
 component released in Delphi 10.4.2 as well as the [Skia4Delphi](https://docwiki.embarcadero.com/RADStudio/Athens/en/Skia4Delphi) released with Delphi 12.
-Because the program makes heavy use of multi-line strings, the project requires Delphi 12.0 or better to build.
+Because the program makes heavy use of multi-line string constants, the project requires Delphi 12.0 or better to build.
 
+## Release History
+
+September 18, 2024 - 1.1
+* Added ability to specify an additional user directory containing SVG files that will be loaded into the library collections for viewing and exporting.
+These icons will be displayed as is and `fill` color replacement will be performed on any "currentColor" color settings globally to the icon.
+* Added confirmation message when saving an SVG or PNG to a location where that filename already exists.
+* Added ability to create a TImageCollection from all images in the currently selected user folder.
+
+September 16, 2024 - 1.0
+* Initial release
 

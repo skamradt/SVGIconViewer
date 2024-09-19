@@ -57,6 +57,8 @@ type
     Shape3: TShape;
     pmLibrary: TPopupMenu;
     pnlSearchInfo: TPanel;
+    pnlImageCollection: TPanel;
+    svgImageCollection: TSkSvg;
     procedure FormCreate(Sender: TObject);
     procedure svgRegularClick(Sender: TObject);
     procedure svgFilledClick(Sender: TObject);
@@ -79,6 +81,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure LibraryClick(Sender: TObject);
     procedure pmLibraryPopup(Sender: TObject);
+    procedure ClickGenerateCollection(Sender: TObject);
   private
     fFillColor : TColor;
     fToneColor : TColor;
@@ -88,6 +91,7 @@ type
     fIconLibrary : ISVGLibrary;
     fCollectionIdx : integer;
     fCollection : ISVGLibraryCollection;
+    fUserDir : String;
     procedure LoadFormPosition;
     procedure SaveFormPosition;
     procedure SetFillColor(Value:TColor);
@@ -121,8 +125,10 @@ uses
   svgIcon.Utils,
   svgViewer.IconLibrary,
   svgViewer.Icons.Search,
+  svgViewer.GenerateImageCollection,
   svgIcons.FluentUIRegular20.Source,
   svgIcons.FluentUIFilled20.Source,
+  IconCollections.UserFolderIcons,
   IconCollections.RegisterTablerIcons,
   IconCollections.RegisterMicrosoftFluentUI;
 
@@ -133,15 +139,46 @@ begin
   pmFill.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
 end;
 
+procedure TForm4.ClickGenerateCollection(Sender: TObject);
+var
+  Obj : IUnknown;
+begin
+  if Application.MessageBox('This may copy a large amount of data to the clipboard.'
+    + #13#10#13#10 + 'Are you sure you wish to procede?', 'Confirm',
+    MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO then exit;
+  Obj := TGenerateImageCollection.Create(fList,fSettings.GetOptionIntDefault('pngsize',20));
+  ShowMessage('A TImageCollection Component containing all SVG images in the user directory which were then converted to PNG images was copied to clipboard.');
+end;
+
 procedure TForm4.ClickSettings(Sender: TObject);
 var
   dlg  : TViewIconsConfigDlg;
+  bNewUserDir : boolean;
+  FolderList : ISVGUserFolderList;
 begin
   dlg := TViewIconsConfigDlg.create(Self);
   try
     dlg.Config := fSettings;
     if dlg.ShowModal = mrOk then
-      ;
+      begin
+        // if we didn't have a previous user folder, but there is one now,
+        //  add the user folder collection
+        bNewUserDir := fUserDir = '';
+        fUserDir := fSettings.GetOptionStrDefault('userdir',fUserDir);
+        // consider if we need to register a new collection
+        bNewUserDir := (bNewUserDir and (fUSerDir <> ''));
+        if bNewUSerDir then
+          fIconLibrary.RegisterIconCollection(TUserFolderIcons.Create(fUserDir));
+        // only update if the current list is a folderlist
+        if Supports(fCollection,ISVGUserFolderList) and
+          Supports(fList,ISVGUserFolderList,FolderList) and
+          (fUserDir <> '') then
+          begin
+            FolderList.Directory := fUserDir;
+            ControlList1.ItemCount := fList.Count;
+          end;
+
+      end;
   finally
     dlg.free;
   end;
@@ -190,9 +227,15 @@ begin
   pnlBackColor.Color := StyleServices.GetSystemColor(clBtnFace);
   pnlToneColor.Color := StyleServices.GetSystemColor(clBtnFace);
   pnlFillColor.Color := StyleServices.GetSystemColor(clBtnFace);
+  pnlImageCollection.color := StyleServices.GetSystemColor(clBtnFace);
   // library collection registrations
   IconCollections.RegisterMicrosoftFluentUI.RegisterCollections(fIconLIbrary);
   IconCollections.RegisterTablerIcons.RegisterCollections(fIconLibrary);
+  fUserDir := fSettings.GetOptionStrDefault('userdir','');
+  if fUserDir <> '' then
+    begin
+      fIconLibrary.RegisterIconCollection(TUserFolderIcons.Create(fUserDir));
+    end;
   // defaults
   fStyle := TSVGIconListType(fSettings.GetOptionIntDefault('style',0));
   fCollectionIdx := fSettings.GetOptionIntDefault('collection',4);
@@ -246,21 +289,40 @@ var
   pngImg : TWICImage;
   Sizes : TArray<INteger>;
   Size : integer;
+  mRes : TModalResult;
+  bFileExists : boolean;
 begin
+  SetLength(Sizes,1);
+  Sizes[0] := fSettings.GetOptionIntDefault('pngsize',20);
+  if fSettings.GetOptionBooleanDefault('pngscaled',true) then
+    begin
+      SetLength(Sizes,5);
+      Sizes[1] := Trunc(Sizes[0] * 1.25);
+      Sizes[2] := Trunc(Sizes[0] * 1.5);
+      Sizes[3] := Trunc(Sizes[0] * 1.75);
+      Sizes[4] := Trunc(Sizes[0] * 2);
+    end;
   pngSaveDlg.Title := 'Save '+fList.name[ControlList1.itemindex]+' as SVG file';
   pngSavedlg.filename := STringReplace(fList.name[ControlList1.itemindex],#32,'_',[rfReplaceAll])+'.png';
-  if pngSaveDlg.Execute then
+  mRes := mrYes;
+  bFileExists := false;
+  repeat
+    if not pngSavedlg.execute then
+      mRes := mrCancel
+    else
+    begin
+      if Length(Sizes)=1 then
+        bFileExists := TFile.Exists(pngSaveDlg.FileName)
+      else
+        for size in Sizes do
+          bFileExists := bFileExists or TFile.Exists(StringReplace(pngSaveDlg.FileName,'.png','-'+INtToStr(Size)+'.png',[]));
+      if bFileExists then
+        mRes := Application.MessageBox('There is already a file with the same name in the target location.  Do you want to overwrite the file?',
+          'Confirm Overwrite', MB_YESNOCANCEL + MB_ICONWARNING + MB_DEFBUTTON2);
+    end;
+  until mRes in [mrCancel,mrYes];
+  if mRes = mrYes then
   begin
-    SetLength(Sizes,1);
-    Sizes[0] := fSettings.GetOptionIntDefault('pngsize',20);
-    if fSettings.GetOptionBooleanDefault('pngscaled',true) then
-      begin
-        SetLength(Sizes,5);
-        Sizes[1] := Trunc(Sizes[0] * 1.25);
-        Sizes[2] := Trunc(Sizes[0] * 1.5);
-        Sizes[3] := Trunc(Sizes[0] * 1.75);
-        Sizes[4] := Trunc(Sizes[0] * 2);
-      end;
     for size in Sizes do
     begin
       LBitmap := TBitmap.Create;
@@ -283,7 +345,10 @@ begin
         LBitmap.AlphaFormat := afDefined;
         pngImg.Assign(LBitmap);
         pngImg.ImageFormat := wifPng;
-        pngImg.SaveToFile(StringReplace(pngSaveDlg.FileName,'.png','-'+INtToStr(Size)+'.png',[]));
+        if Length(Sizes) > 1 then
+          pngImg.SaveToFile(StringReplace(pngSaveDlg.FileName,'.png','-'+INtToStr(Size)+'.png',[]))
+        else
+          pngImg.SaveToFile(pngSaveDlg.FileName);
       finally
         pngImg.Free;
       end;
@@ -292,13 +357,22 @@ begin
 end;
 
 procedure TForm4.mniSaveSVGFileClick(Sender: TObject);
+var
+  mres : TModalREsult;
 begin
   svgSaveDlg.title := 'Save '+fList.name[ControlList1.itemindex]+' as SVG file';
   svgSavedlg.filename := STringReplace(fList.name[ControlList1.itemindex],#32,'_',[rfReplaceAll])+'.svg';
-  if svgSaveDlg.execute then
+  repeat
+    mRes := mrYes;
+    if svgSaveDlg.execute then
     begin
-      TFile.WriteAllText(svgSaveDlg.filename,fList.Source[Controllist1.itemindex]);
+      if TFile.exists(svgSaveDlg.filename) then
+        mRes := Application.MessageBox('There is already a file with the same name in the target location.  Do you want to overwrite the file?',
+          'Confirm Overwrite', MB_YESNOCANCEL + MB_ICONWARNING + MB_DEFBUTTON2);
+      if mRes = mrYes then
+        TFile.WriteAllText(svgSaveDlg.filename,fList.Source[Controllist1.itemindex]);
     end;
+  until mRes in [mrCancel,mrYes];
 end;
 
 procedure TForm4.pmIconPopup(Sender: TObject);
@@ -368,12 +442,27 @@ begin
 end;
 
 procedure TForm4.SelectCollection(Sender: TObject);
+var
+  FolderList : ISVGUserFolderList;
+  bShowImageCollection : boolean;
 begin
   if Sender is TMenuItem then
     fCollectionIdx := TMenuItem(Sender).tag;
   fCollection := fIconLibrary.Collection(fCollectionIdx);
+  bShowImageCollection := false;
+  if Supports(fCollection,ISVGUserFolderList,FolderList) then
+    begin
+      FolderList.Directory := fUserDir;
+      bShowImageCollection := true;
+    end;
+  pnlImageCollection.Visible := bShowImageCollection;
+  if pnlImageCollection.Visible then
+    pnlBackColor.left := pnlImageCollection.left;
   pnlTwoTone.visible := ltTwoTone in fCollection.Available;
+  pnlFilled.Visible := ltFilled in fCollection.Available;
   Caption := C_CAPTION +' : '+fCollection.Name;
+  if (not pnlFilled.Visible) and (fStyle = ltFilled) then
+    fStyle := ltOutline;
   if (not pnlTwoTone.Visible) and (fstyle = ltTwoTone) then
     fStyle := ltOutline;
   case fStyle of

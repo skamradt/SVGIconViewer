@@ -79,7 +79,10 @@ uses
   svgIcons.FluentUIRegular32.names in 'IconLibrary\svgIcons.FluentUIRegular32.names.pas',
   svgIcons.FluentUIRegular32 in 'IconLibrary\svgIcons.FluentUIRegular32.pas',
   svgIcons.FluentUIRegular32.source in 'IconLibrary\svgIcons.FluentUIRegular32.source.pas',
-  IconCollections.RegisterTablerIcons in 'IconCollections\IconCollections.RegisterTablerIcons.pas';
+  IconCollections.RegisterTablerIcons in 'IconCollections\IconCollections.RegisterTablerIcons.pas',
+  IconCollections.UserFolderIcons in 'IconCollections\IconCollections.UserFolderIcons.pas',
+  svgIcons.UserFolderIcons in 'IconLibrary\svgIcons.UserFolderIcons.pas',
+  svgViewer.GenerateImageCollection in 'svgViewer.GenerateImageCollection.pas';
 
 {$R *.res}
 
