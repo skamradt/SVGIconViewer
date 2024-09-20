@@ -1,13 +1,16 @@
-# SVGIconViewer
+# SVGIconViewer v1.2
 
-![Picture of application UI](./images/Screenshot_2024-09-16_095721.png "Screen Capture")
+![Picture of application UI](./images/Screenshot 2024-09-20 114038.png "Screen Capture")
 
-A simple windows based viewer containing over 27,450 individual SVG icons with the ability to copy
+A simple windows based viewer containing over 43,900 individual SVG icons with the ability to copy
 and export individual icons for use in other projects.  Two-tone ability was added
 to render icons using both the outline and filled versions where there is a match.
 
 Exporting to PNG will optionally create additional scaled versions ready to be imported
 into a Delphi image collection.
+
+Specifying a user folder will allow the system to create a TImageCollection component, allowing
+quick pasting into your project as converted PNG files.
 
 This project includes icons from the [Microsoft fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
 and the [tabler-icons](https://github.com/tabler/tabler-icons) public repositories. Please see the appopriate library
@@ -59,6 +62,13 @@ component released in Delphi 10.4.2 as well as the [Skia4Delphi](https://docwiki
 Because the program makes heavy use of multi-line string constants, the project requires Delphi 12.0 or better to build.
 
 ## Release History
+
+September 19, 2024 - 1.2
+* Replaced toolbar panels with TControlLists for a better UI experience.
+* Removed duplicate solid filled icons from the tabler-icons alternate strokes collections.
+* Removed reference to the spring library. It is no longer used to reduce dependencies.
+* Added count of icons at startup. This count does not include icons in the user specified folder.
+* Added the bootstrap icon library
 
 September 18, 2024 - 1.1
 * Added ability to specify an additional user directory containing SVG files that will be loaded into the library collections for viewing and exporting.

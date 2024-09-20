@@ -482,6 +482,7 @@ begin
   if not Supports(fList,ISVGSearchList,SearchList) then
     Raise ENotImplemented.create('Search is not supported for the current list');
   SearchList.SearchText := SearchBox1.Text;
+  SearchBox1.SelectAll;
   ControlList1.ItemCount := fList.count;
   lblAvailableIconCount.caption := IntToStr(fList.Count);
   ControlList1.Invalidate;

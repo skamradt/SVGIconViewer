@@ -39,7 +39,7 @@ begin
   case ListType of
     ltOutline : Result := TBootstrapOutline16IconList.create;
     ltFilled : Result := TBootstrapFilled16IconList.create;
-    ltTwoTone : Result := TFluentUITwoToneIconList.Create(TBootstrapOutline16IconList.create,TBootstrapFilled16IconList.create);
+    ltTwoTone : Result := TFluentUITwoToneIconList.Create(TBootstrapFilled16IconList.create,TBootstrapOutline16IconList.create);
   end;
 end;
 
