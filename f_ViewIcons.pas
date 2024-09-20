@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Skia, Vcl.Skia, Vcl.ControlList,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.WinXCtrls, svgViewer.Types, Vcl.ComCtrls,
   Vcl.Menus, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  Vcl.BaseImageCollection, Vcl.ImageCollection, u_ViewIconsSettings;
+  Vcl.BaseImageCollection, Vcl.ImageCollection, u_ViewIconsSettings, svgViewer.RightToolbarController;
 
 const
   C_CAPTION = 'SVG Icon Viewer';
@@ -17,29 +17,12 @@ type
     pnlToolbar: TPanel;
     ControlList1: TControlList;
     svgIcon: TSkSvg;
-    pnlRegular: TPanel;
-    svgRegular: TSkSvg;
-    pnlFilled: TPanel;
-    svgFilled: TSkSvg;
-    pnlTwoTone: TPanel;
-    svgTwoTone: TSkSvg;
     dlgColor: TColorDialog;
-    pnlSettings: TPanel;
-    svgSettings: TSkSvg;
     lblAvailableIconsCaption: TLabel;
     Shape1: TShape;
     lblAvailableIconCount: TLabel;
     SearchBox1: TSearchBox;
     Shape2: TShape;
-    pnlBackColor: TPanel;
-    svgBackColor: TSkSvg;
-    pnlFillColor: TPanel;
-    svgFillColor: TSkSvg;
-    pnlToneColor: TPanel;
-    svgToneColor: TSkSvg;
-    lblBackColor: TLabel;
-    lblToneColor: TLabel;
-    lblFillColor: TLabel;
     StatusBar1: TStatusBar;
     pmIcon: TPopupMenu;
     mniCopySvgClipboard: TMenuItem;
@@ -52,13 +35,20 @@ type
     pmFill: TPopupMenu;
     pmSelectFillNone: TMenuItem;
     pmSelectFillColor: TMenuItem;
-    pnlSelectLibrary: TPanel;
-    svgSelectLibrary: TSkSvg;
     Shape3: TShape;
     pmLibrary: TPopupMenu;
     pnlSearchInfo: TPanel;
-    pnlImageCollection: TPanel;
-    svgImageCollection: TSkSvg;
+    lstRightToolbar: TControlList;
+    shpRBtnBorder: TShape;
+    svgColorIcon: TSkSvg;
+    lblColorLbl: TLabel;
+    svgRightIcon: TSkSvg;
+    lstIconTypes: TControlList;
+    shpTypeBtnBorder: TShape;
+    svgIconType: TSkSvg;
+    lstLibrary: TControlList;
+    shpLibBorder: TShape;
+    svgLibrary: TSkSvg;
     procedure FormCreate(Sender: TObject);
     procedure svgRegularClick(Sender: TObject);
     procedure svgFilledClick(Sender: TObject);
@@ -82,6 +72,11 @@ type
     procedure LibraryClick(Sender: TObject);
     procedure pmLibraryPopup(Sender: TObject);
     procedure ClickGenerateCollection(Sender: TObject);
+    procedure lstIconTypesBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+      ARect: TRect; AState: TOwnerDrawState);
+    procedure lstIconTypesItemClick(Sender: TObject);
+    procedure lstIconTypesEnableItem(const AIndex: Integer;
+      var AEnabled: Boolean);
   private
     fFillColor : TColor;
     fToneColor : TColor;
@@ -92,6 +87,7 @@ type
     fCollectionIdx : integer;
     fCollection : ISVGLibraryCollection;
     fUserDir : String;
+    fRightToolbar : ISVGViewerRightToolbar;
     procedure LoadFormPosition;
     procedure SaveFormPosition;
     procedure SetFillColor(Value:TColor);
@@ -104,6 +100,7 @@ type
     procedure UpdateColorSvg(aSvg:TSkSvg;aColor:TColor);
     procedure SetList(Value:ISVGIconList);
     procedure SelectCollection(Sender:TObject);
+    procedure CountAllIcons;
   public
     { Public declarations }
 
@@ -128,6 +125,7 @@ uses
   svgViewer.GenerateImageCollection,
   svgIcons.FluentUIRegular20.Source,
   svgIcons.FluentUIFilled20.Source,
+  IconCollections.Bootstrap,
   IconCollections.UserFolderIcons,
   IconCollections.RegisterTablerIcons,
   IconCollections.RegisterMicrosoftFluentUI;
@@ -135,8 +133,11 @@ uses
 {$R *.dfm}
 
 procedure TForm4.ClickFillColor(Sender: TObject);
+var
+  pt : TPoint;
 begin
-  pmFill.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+  Pt := ClientToScreen(Point(lstRightToolbar.left,lstRightToolbar.Top+lstRightToolbar.height-2));
+  pmFill.Popup(pt.X,pt.Y);
 end;
 
 procedure TForm4.ClickGenerateCollection(Sender: TObject);
@@ -206,6 +207,29 @@ begin
   Statusbar1.SimpleText := '  '+fList.Name[ControlLIst1.ItemIndex];
 end;
 
+procedure TForm4.CountAllIcons;
+var
+  aCollection : ISVGLibraryCollection;
+  aList : ISVGIconList;
+  Ix, Count : integer;
+begin
+  Count := 0;
+  for Ix := 0 to fIconLibrary.CollectionCount-1 do
+    begin
+      aCollection := fIconLibrary.Collection(ix);
+      // IGNORE any user folder icon collections in the count!
+      if supports(aCollection,ISVGUserFolderList) then
+        continue;
+      if ltOutline in aCollection.Available then
+        Count := Count + aCollection.list[ltOutline].count;
+      if ltFilled in aCollection.Available then
+        Count := Count + aCollection.list[ltFilled].count;
+      if ltTwoTone in aCollection.Available then
+        Count := Count + aCollection.list[ltTwoTone].count;
+    end;
+  StatusBar1.SimpleText := Format('  There are a total of %.0n available icons!',[count+0.0]);
+end;
+
 procedure TForm4.dlgColorShow(Sender: TObject);
 begin
   case dlgColor.Tag of
@@ -221,16 +245,10 @@ begin
   fSettings := TSettings.create;
   fList := TSearchIconList.create;
   fIconLibrary := TIconLibrary.create;
-  // set button background colors to initial values
-  pnlSelectLibrary.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlSettings.color := StyleServices.GetSystemColor(clBtnFace);
-  pnlBackColor.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlToneColor.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlFillColor.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlImageCollection.color := StyleServices.GetSystemColor(clBtnFace);
   // library collection registrations
   IconCollections.RegisterMicrosoftFluentUI.RegisterCollections(fIconLIbrary);
   IconCollections.RegisterTablerIcons.RegisterCollections(fIconLibrary);
+  fIconLibrary.RegisterIconCollection(TBootstrapIcons16.create);
   fUserDir := fSettings.GetOptionStrDefault('userdir','');
   if fUserDir <> '' then
     begin
@@ -241,12 +259,18 @@ begin
   fCollectionIdx := fSettings.GetOptionIntDefault('collection',4);
   if fCollectionIdx > fIconLibrary.CollectionCount-1 then
     fCollectionIdx := 0;
-  SelectCollection(nil);
   LoadFormPosition;
+  fRightToolbar := TRightToolbarController.create(lstRightToolbar,svgColorIcon,lblColorLbl,svgRightIcon);
+  fRightToolbar.ButtonEvents[btnFillColor] := ClickFillColor;
+  fRightToolbar.ButtonEvents[btnToneColor] := ClickToneColor;
+  fRightToolbar.ButtonEvents[btnBackColor] := ClickBackColor;
+  fRightToolbar.ButtonEvents[btnCopyCode] := ClickGenerateCollection;
+  fRightToolbar.ButtonEvents[btnSettings] := ClickSettings;
+  SelectCollection(nil);
   SetFillColor(fSettings.GetOptionColorDefault('fillcolor',clNone));
   SetToneColor(fSettings.GetOptionColorDefault('tonecolor',clSilver));
   SetBackColor(fSettings.GetOptionColorDefault('backcolor',StyleServices.GetSystemColor(clWindow)));
-
+  CountAllIcons;
 end;
 
 procedure TForm4.FormDestroy(Sender: TObject);
@@ -257,8 +281,12 @@ begin
 end;
 
 procedure TForm4.LibraryClick(Sender: TObject);
+var
+  pt : TPoint;
 begin
-  pmLibrary.popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+  Pt := ClientToScreen(Point(lstLibrary.left,lstLibrary.Top+lstLibrary.height-2));
+  pmLibrary.popup(pt.x,pt.y);
+  lstLibrary.ItemIndex := -1;
 end;
 
 procedure TForm4.LoadFormPosition;
@@ -275,6 +303,41 @@ begin
   top := fSettings.GetOptionIntDefault('mainform.top',(Screen.Height DIV 2) - (height DIV 2));
   if top > screen.height then
     Top := (Screen.Height DIV 2) - (height DIV 2);
+end;
+
+procedure TForm4.lstIconTypesBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+  ARect: TRect; AState: TOwnerDrawState);
+const
+  C_SVG = '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">';
+  C_END = '</svg>';
+begin
+  case aIndex of
+    0 : svgIconType.svg.Source := C_SVG+C_FluentUI_Icons_Regular_20+C_END;
+    1 : svgIconType.svg.Source := C_SVG+C_FluentUI_Icons_Filled_20+C_END;
+    2 : svgIconType.svg.Source := C_SVG+
+          StringReplace(C_FluentUI_Icons_Filled_20,'"#212121"','"silver"',[rfReplaceAll])+
+          C_FluentUI_Icons_Regular_20+
+          C_END;
+  end;
+end;
+
+procedure TForm4.lstIconTypesEnableItem(const AIndex: Integer;
+  var AEnabled: Boolean);
+begin
+  case aIndex of
+    0 : AEnabled := true;
+    1 : AEnabled := ltFilled in fCollection.Available;
+    2 : AEnabled := ltTwoTone in fCollection.Available;
+  end;
+end;
+
+procedure TForm4.lstIconTypesItemClick(Sender: TObject);
+begin
+  case lstIconTypes.Itemindex of
+    0 : SelectRegular;
+    1 : SelectFilled;
+    2 : SelectTwoTone;
+  end;
 end;
 
 procedure TForm4.mniCopySvgClipboardClick(Sender: TObject);
@@ -445,6 +508,7 @@ procedure TForm4.SelectCollection(Sender: TObject);
 var
   FolderList : ISVGUserFolderList;
   bShowImageCollection : boolean;
+  bTwoToneEnabled, bFilledEnabled : boolean;
 begin
   if Sender is TMenuItem then
     fCollectionIdx := TMenuItem(Sender).tag;
@@ -455,30 +519,27 @@ begin
       FolderList.Directory := fUserDir;
       bShowImageCollection := true;
     end;
-  pnlImageCollection.Visible := bShowImageCollection;
-  if pnlImageCollection.Visible then
-    pnlBackColor.left := pnlImageCollection.left;
-  pnlTwoTone.visible := ltTwoTone in fCollection.Available;
-  pnlFilled.Visible := ltFilled in fCollection.Available;
+  fRightToolbar.CopyCodeEnabled := bShowImageCollection;
   Caption := C_CAPTION +' : '+fCollection.Name;
-  if (not pnlFilled.Visible) and (fStyle = ltFilled) then
+  bTwoToneEnabled := ltTwoTone in fCollection.Available;
+  bFilledEnabled := ltFilled in fCollection.Available;
+  if (not bFilledEnabled) and (fStyle = ltFilled) then
     fStyle := ltOutline;
-  if (not pnlTwoTone.Visible) and (fstyle = ltTwoTone) then
+  if (not bTwoToneEnabled) and (fstyle = ltTwoTone) then
     fStyle := ltOutline;
   case fStyle of
     ltOutline : SelectRegular;
     ltFilled : SelectFilled;
     ltTwoTone : selectTwoTone;
   end;
+  lstIconTypes.Invalidate;
 end;
 
 procedure TForm4.SelectFilled;
 begin
   fStyle := ltFilled;
-  pnlRegular.color := StyleServices.GetSystemColor(clBtnFace);
-  pnlFilled.color := StyleServices.GetSystemColor(clHighlight);
-  pnlTwoTone.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlToneColor.visible := false;
+  lstIconTypes.itemIndex := 1;
+  fRightToolbar.ToneColorEnabled := false;
   SetList(fCollection.list[ltFilled]);
   fList.FillColor := fFillColor;
   UpdateList;
@@ -487,10 +548,8 @@ end;
 procedure TForm4.SelectRegular;
 begin
   fStyle := ltOutline;
-  pnlRegular.color := StyleServices.GetSystemColor(clHighlight);
-  pnlFilled.color := StyleServices.GetSystemColor(clBtnFace);
-  pnlTwoTone.Color := StyleServices.GetSystemColor(clBtnFace);
-  pnlToneColor.visible := false;
+  lstIconTypes.itemIndex := 0;
+  fRightToolbar.ToneColorEnabled := false;
   SetList(fCollection.list[ltOutline]);
   fList.FillColor := fFillColor;
   UpdateList;
@@ -501,12 +560,8 @@ var
   IconTone : ISVGTwoToneIconList;
 begin
   fStyle := ltTwoTone;
-  pnlRegular.color := StyleServices.GetSystemColor(clBtnFace);
-  pnlFilled.color := StyleServices.GetSystemColor(clBtnFace);
-  pnlTwoTone.Color := StyleServices.GetSystemColor(clHighlight);
-  pnlFillColor.Visible := false;
-  pnlToneColor.visible := True;
-  pnlFillColor.Visible := True;
+  lstIconTypes.itemIndex := 2;
+  fRightToolbar.ToneColorEnabled := True;
   SetList(fCollection.list[ltTwoTone]);
   if Supports(fList,ISVGTwoToneIconList,IconTone) then
     IconTone.ToneColor := fToneColor;
@@ -517,14 +572,14 @@ end;
 procedure TForm4.SetBackColor(Value: TColor);
 begin
   ControlList1.Color := Value;
-  UpdateColorSvg(svgBackColor, ControlList1.Color);
+  fRightToolbar.BackColor := value;
 end;
 
 procedure TForm4.SetFillColor(Value: TColor);
 begin
   fFillColor := Value;
   fList.FillColor := fFillColor;
-  UpdateColorSvg(svgFillColor, fFillColor);
+  fRightToolbar.FillColor := value;
   ControlList1.Invalidate;
 end;
 
@@ -543,7 +598,7 @@ var
   iconTone : ISVGTwoToneIconList;
 begin
   fToneColor := Value;
-  UpdateColorSvg(svgToneColor, fToneColor);
+  fRightToolbar.ToneColor := value;
   fSettings.SetOptionColor('tonecolor',fToneColor);
   if Supports(fList,ISVGTwoToneIconList,IconTone) then
     IconTone.ToneColor := fToneColor;

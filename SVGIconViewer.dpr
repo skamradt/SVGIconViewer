@@ -82,7 +82,17 @@ uses
   IconCollections.RegisterTablerIcons in 'IconCollections\IconCollections.RegisterTablerIcons.pas',
   IconCollections.UserFolderIcons in 'IconCollections\IconCollections.UserFolderIcons.pas',
   svgIcons.UserFolderIcons in 'IconLibrary\svgIcons.UserFolderIcons.pas',
-  svgViewer.GenerateImageCollection in 'svgViewer.GenerateImageCollection.pas';
+  svgViewer.GenerateImageCollection in 'svgViewer.GenerateImageCollection.pas',
+  svgViewer.RightToolbarController in 'svgViewer.RightToolbarController.pas',
+  svgIcons.BootstrapFilled16.icons in 'IconLibrary\svgIcons.BootstrapFilled16.icons.pas',
+  svgIcons.BootstrapFilled16.names in 'IconLibrary\svgIcons.BootstrapFilled16.names.pas',
+  svgIcons.BootstrapFilled16 in 'IconLibrary\svgIcons.BootstrapFilled16.pas',
+  svgIcons.BootstrapFilled16.source in 'IconLibrary\svgIcons.BootstrapFilled16.source.pas',
+  svgIcons.BootstrapOutline16.icons in 'IconLibrary\svgIcons.BootstrapOutline16.icons.pas',
+  svgIcons.BootstrapOutline16.names in 'IconLibrary\svgIcons.BootstrapOutline16.names.pas',
+  svgIcons.BootstrapOutline16 in 'IconLibrary\svgIcons.BootstrapOutline16.pas',
+  svgIcons.BootstrapOutline16.source in 'IconLibrary\svgIcons.BootstrapOutline16.source.pas',
+  IconCollections.Bootstrap in 'IconCollections\IconCollections.Bootstrap.pas';
 
 {$R *.res}
 

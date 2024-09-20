@@ -60,7 +60,7 @@ begin
   if fStrokeWidth = 2 then
     Result := [ltOutline,ltFilled,ltTwoTone]
   else
-    Result := [ltOutline,ltFilled];
+    Result := [ltOutline]; // other strokes are identical
 end;
 
 

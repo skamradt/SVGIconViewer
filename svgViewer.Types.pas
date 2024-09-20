@@ -3,12 +3,39 @@ unit svgViewer.Types;
 interface
 
 uses
-  Spring.Collections,
+  System.Classes,
   Graphics;
 
 type
   TSVGIconListType = (ltOutline,ltFilled,ltTwoTone);
   TSVGIconListTypes = set of TSVGIConListType;
+
+  TRightMainToolbarButtons = (btnFillColor,btnToneColor,btnBackColor,btnCopyCode,btnSettings);
+
+
+  ISVGViewerRightToolbar = interface
+    ['{D47B15B6-F079-4333-B0CB-D8FDFBC75378}']
+    function GetBackColor: TColor;
+    function GetFillColor: TColor;
+    function GetToneColor: TColor;
+    function GetToneColorEnabled: Boolean;
+    function GetCopyCodeEnabled: boolean;
+    function GetButtonEvent(aButton: TRightMainToolbarButtons): TNotifyEvent;
+    procedure SetBackColor(const Value: TColor);
+    procedure SetFillColor(const Value: TColor);
+    procedure SetToneColor(const Value: TColor);
+    procedure SetToneColorEnabled(const Value: Boolean);
+    procedure SetCopyCodeEnabled(const Value: boolean);
+    procedure SetButtonEvent(aButton: TRightMainToolbarButtons;
+      const Value: TNotifyEvent);
+    property FillColor : TColor read GetFillColor write SetFillColor;
+    property ToneColor : TColor read GetToneColor write SetToneColor;
+    property ToneColorEnabled : Boolean read GetToneColorEnabled write SetToneColorEnabled;
+    property BackColor : TColor read GetBackColor write SetBackColor;
+    property CopyCodeEnabled : boolean read GetCopyCodeEnabled write SetCopyCodeEnabled;
+    property ButtonEvents[aButton:TRightMainToolbarButtons]:TNotifyEvent read GetButtonEvent write SetButtonEvent;
+  end;
+
 
   ISVGIconList = interface
     ['{D08C9599-A11E-43D8-A480-2FCC3EC4C9A7}']

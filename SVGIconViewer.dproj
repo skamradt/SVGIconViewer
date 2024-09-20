@@ -117,6 +117,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>$(ProjectName).Artwork\Windows\AppIcon.ico</Icon_MainIcon>
+        <Debugger_RunParams>-count</Debugger_RunParams>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -224,6 +225,16 @@
         <DCCReference Include="IconCollections\IconCollections.UserFolderIcons.pas"/>
         <DCCReference Include="IconLibrary\svgIcons.UserFolderIcons.pas"/>
         <DCCReference Include="svgViewer.GenerateImageCollection.pas"/>
+        <DCCReference Include="svgViewer.RightToolbarController.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapFilled16.icons.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapFilled16.names.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapFilled16.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapFilled16.source.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapOutline16.icons.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapOutline16.names.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapOutline16.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.BootstrapOutline16.source.pas"/>
+        <DCCReference Include="IconCollections\IconCollections.Bootstrap.pas"/>
         <None Include="README.md"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

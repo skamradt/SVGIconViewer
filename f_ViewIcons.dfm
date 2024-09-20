@@ -6,7 +6,7 @@ object Form4: TForm4
   ClientWidth = 784
   Color = clBtnFace
   Constraints.MinHeight = 214
-  Constraints.MinWidth = 486
+  Constraints.MinWidth = 580
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -36,31 +36,206 @@ object Form4: TForm4
       Pen.Color = clSilver
       ExplicitLeft = 51
     end
-    object pnlRegular: TPanel
-      AlignWithMargins = True
-      Left = 57
-      Top = 3
-      Width = 40
-      Height = 39
+    object pnlSearchInfo: TPanel
+      Left = 188
+      Top = 0
+      Width = 151
+      Height = 45
       Align = alLeft
-      BevelKind = bkSoft
       BevelOuter = bvNone
-      Caption = 'Panel2'
-      Color = clHighlight
-      ParentBackground = False
+      Caption = 'pnlSearchInfo'
       ShowCaption = False
       TabOrder = 0
-      StyleElements = [seFont, seBorder]
-      object svgRegular: TSkSvg
+      object lblAvailableIconCount: TLabel
+        Left = 105
+        Top = -1
+        Width = 35
+        Height = 17
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = '00000'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblAvailableIconsCaption: TLabel
+        Left = 10
+        Top = -1
+        Width = 89
+        Height = 17
+        Caption = 'Available Icons:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Shape1: TShape
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 2
+        Height = 39
+        Align = alLeft
+        Pen.Color = clSilver
+        ExplicitLeft = 219
+      end
+      object Shape2: TShape
+        AlignWithMargins = True
+        Left = 146
+        Top = 3
+        Width = 2
+        Height = 39
+        Align = alRight
+        Pen.Color = clSilver
+        ExplicitLeft = 361
+      end
+      object SearchBox1: TSearchBox
+        Left = 10
+        Top = 17
+        Width = 131
+        Height = 23
+        TabOrder = 0
+        TextHint = 'Name Search'
+        OnInvokeSearch = SearchBox1InvokeSearch
+      end
+    end
+    object lstRightToolbar: TControlList
+      AlignWithMargins = True
+      Left = 561
+      Top = 3
+      Width = 220
+      Height = 40
+      Margins.Bottom = 2
+      Align = alRight
+      BorderStyle = bsNone
+      Color = clBtnFace
+      ItemCount = 5
+      ItemWidth = 40
+      ItemHeight = 40
+      ItemMargins.Left = 2
+      ItemMargins.Top = 0
+      ItemMargins.Right = 2
+      ItemMargins.Bottom = 0
+      ColumnLayout = cltMultiLeftToRight
+      ParentColor = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 1
+      object shpRBtnBorder: TShape
         Left = 0
         Top = 0
-        Width = 36
-        Height = 35
+        Width = 40
+        Height = 40
+        Brush.Style = bsClear
+        Pen.Color = clSilver
+        Pen.Width = 2
+      end
+      object svgColorIcon: TSkSvg
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 34
+        Height = 18
+        Hint = 'Change Icon Backround (display only)'
+        Margins.Bottom = 0
+        Align = alTop
+        ParentShowHint = False
+        PopupMenu = pmFill
+        ShowHint = True
+        Svg.Source = 
+          '<svg width="15" height="15" viewBox="0 0 20 20" xmlns="http://ww' +
+          'w.w3.org/2000/svg">'#10'<path d="M8.94564 0.0549927C6.74682 0.285834' +
+          ' 4.60989 1.24382 2.92475 2.92896C1.23961 4.6141 0.281623 6.75103' +
+          ' 0.0507812 8.94985L8.94564 0.0549927ZM0.187287 11.9529L11.9487 0' +
+          '.191497C12.7562 0.35151 13.5479 0.611816 14.3036 0.972415L0.9682' +
+          '03 14.3078C0.607604 13.5521 0.347298 12.7604 0.187287 11.9529ZM2' +
+          '.17825 16.2373C2.40881 16.5255 2.65765 16.804 2.92475 17.0711C3.' +
+          '19237 17.3387 3.47139 17.588 3.76024 17.8189L17.8147 3.76445C17.' +
+          '5838 3.4756 17.3345 3.19658 17.0669 2.92896C16.7998 2.66186 16.5' +
+          '213 2.41302 16.2331 2.18246L2.17825 16.2373ZM19.0244 5.69432L5.6' +
+          '9011 19.0286C6.44697 19.3896 7.23982 19.6499 8.04861 19.8097L19.' +
+          '8055 8.05282C19.6457 7.24404 19.3853 6.45118 19.0244 5.69432ZM19' +
+          '.9401 11.0578L11.0536 19.9443C13.2497 19.712 15.3837 18.7543 17.' +
+          '0669 17.0711C18.7501 15.3879 19.7078 13.2539 19.9401 11.0578Z" f' +
+          'ill="silver"/>'#10#10'<path d="M9.99738 2C5.58055 2 2 5.58055 2 9.9973' +
+          '8C2 14.4142 5.58055 17.9948 9.99738 17.9948C14.4142 17.9948 17.9' +
+          '948 14.4142 17.9948 9.99738C17.9948 5.58055 14.4142 2 9.99738 2Z' +
+          'M0 9.99738C0 4.47598 4.47598 0 9.99738 0C15.5188 0 19.9948 4.475' +
+          '98 19.9948 9.99738C19.9948 15.5188 15.5188 19.9948 9.99738 19.99' +
+          '48C4.47598 19.9948 0 15.5188 0 9.99738Z" fill="current"/>'#10'</svg>'
+        ExplicitTop = 2
+      end
+      object lblColorLbl: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 22
+        Width = 34
+        Height = 18
+        Margins.Top = 1
+        Margins.Bottom = 0
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Fill'
+        PopupMenu = pmFill
+        ExplicitWidth = 15
+        ExplicitHeight = 15
+      end
+      object svgRightIcon: TSkSvg
+        Left = 3
+        Top = 3
+        Width = 34
+        Height = 34
+      end
+    end
+    object lstIconTypes: TControlList
+      AlignWithMargins = True
+      Left = 55
+      Top = 3
+      Width = 132
+      Height = 40
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 2
+      Align = alLeft
+      BorderStyle = bsNone
+      Color = clBtnFace
+      ItemCount = 3
+      ItemWidth = 40
+      ItemHeight = 40
+      ItemMargins.Left = 2
+      ItemMargins.Top = 0
+      ItemMargins.Right = 2
+      ItemMargins.Bottom = 0
+      ColumnLayout = cltMultiLeftToRight
+      ParentColor = False
+      TabOrder = 2
+      OnBeforeDrawItem = lstIconTypesBeforeDrawItem
+      OnEnableItem = lstIconTypesEnableItem
+      OnItemClick = lstIconTypesItemClick
+      object shpTypeBtnBorder: TShape
+        Left = 0
+        Top = 0
+        Width = 40
+        Height = 40
+        Brush.Style = bsClear
+        Pen.Color = clSilver
+        Pen.Width = 2
+      end
+      object svgIconType: TSkSvg
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 34
+        Height = 34
         Hint = 'Show Regular Icons'
         Align = alClient
         ParentShowHint = False
         ShowHint = True
-        OnClick = svgRegularClick
         Svg.Source = 
           '<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://ww' +
           'w.w3.org/2000/svg">'#10'<path d="M10 3C8.34315 3 7 4.34315 7 6C7 6.8' +
@@ -117,464 +292,42 @@ object Form4: TForm4
         ExplicitHeight = 31
       end
     end
-    object pnlFilled: TPanel
-      AlignWithMargins = True
-      Left = 103
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alLeft
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      Caption = 'Panel2'
-      ShowCaption = False
-      TabOrder = 1
-      StyleElements = [seFont, seBorder]
-      object svgFilled: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 35
-        Hint = 'Show Filled Icons'
-        Align = alClient
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = svgFilledClick
-        Svg.Source = 
-          '<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://ww' +
-          'w.w3.org/2000/svg">'#10'<path d="M10 2C7.79086 2 6 3.79086 6 6C6 6.7' +
-          '2857 6.19479 7.41165 6.53513 8H3.42308C2.63713 8 2 8.63713 2 9.4' +
-          '2308C2 12.5031 4.49687 15 7.57692 15H8.8507C8.6564 14.5328 8.5 1' +
-          '3.9409 8.5 13.2463C8.5 12.0481 9.16823 11.0368 9.96288 10.3538C1' +
-          '0.7782 9.65303 11.8684 9.16103 13.0639 9.01159C13.3613 8.97442 1' +
-          '3.6568 8.95762 13.9459 8.95598C13.7341 8.72857 13.4875 8.53409 1' +
-          '3.2144 8.38109C13.3049 8.25919 13.3885 8.13198 13.4649 8H15.1666' +
-          'C16.1791 8 16.9999 7.17919 16.9999 6.16667C16.9999 5.52233 16.47' +
-          '76 5 15.8333 5H13.874C13.4299 3.27477 11.8638 2 10 2ZM17.5 10.49' +
-          '99C17.6733 10.4999 17.8342 10.5896 17.9253 10.737C18.0164 10.884' +
-          '5 18.0247 11.0685 17.9472 11.2235C17.896 11.3259 17.8124 11.461 ' +
-          '17.7287 11.5962L17.7125 11.6223C17.617 11.7767 17.5056 11.9571 1' +
-          '7.3884 12.1635C17.1536 12.5766 16.9014 13.0833 16.7279 13.6471C1' +
-          '6.6939 13.7574 16.6581 13.8847 16.619 14.0242C16.4628 14.5807 16' +
-          '.2525 15.3301 15.8844 15.9605C15.6461 16.3685 15.3276 16.7577 14' +
-          '.8878 17.044C14.4435 17.3332 13.9021 17.4999 13.25 17.4999C12.19' +
-          '09 17.4999 11.4424 16.966 10.9774 16.4651C10.7447 16.2145 10.575' +
-          '9 15.9655 10.4649 15.7791C10.4383 15.7345 10.4149 15.6932 10.394' +
-          '6 15.6559C9.78966 16.2682 9.33058 16.9571 8.94732 17.7236C8.8238' +
-          '3 17.9706 8.52349 18.0707 8.2765 17.9472C8.02951 17.8237 7.9294 ' +
-          '17.5234 8.0529 17.2764C8.80681 15.7686 9.83581 14.5305 11.488 13' +
-          '.5669C12.1516 13.1511 12.8888 12.7831 13.6858 12.4642C13.9422 12' +
-          '.3617 14.0669 12.0707 13.9643 11.8143C13.8618 11.5579 13.5708 11' +
-          '.4332 13.3144 11.5358C11.8829 12.1084 10.5889 12.8493 9.53801 13' +
-          '.7662C9.51384 13.6024 9.5 13.4289 9.5 13.2463C9.5 12.4822 9.8093' +
-          ' 11.7342 10.4402 11.1457C11.0666 10.5612 11.9864 10.154 13.188 1' +
-          '0.0039C14.3855 9.85421 15.3828 9.98779 16.14 10.1565C16.4681 10.' +
-          '2296 16.7538 10.31 16.9812 10.3741L17.0761 10.4007C17.1994 10.43' +
-          '52 17.2962 10.4613 17.375 10.4789C17.4136 10.4875 17.4435 10.493' +
-          '1 17.4663 10.4964C17.4775 10.498 17.4859 10.4989 17.4919 10.4994' +
-          'C17.4975 10.4999 17.5 10.4999 17.5 10.4999Z"/>'#10'</svg>'
-        ExplicitLeft = 17
-        ExplicitTop = -1
-        ExplicitWidth = 38
-        ExplicitHeight = 37
-      end
-    end
-    object pnlTwoTone: TPanel
-      AlignWithMargins = True
-      Left = 149
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alLeft
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      Caption = 'Panel2'
-      ShowCaption = False
-      TabOrder = 2
-      StyleElements = [seFont, seBorder]
-      object svgTwoTone: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 35
-        Hint = 'Show Two-Toned Icons'
-        Align = alClient
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = svgTwoToneClick
-        Svg.Source = 
-          '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmln' +
-          's="http://www.w3.org/2000/svg"><path d="M10 2C7.79086 2 6 3.7908' +
-          '6 6 6C6 6.72857 6.19479 7.41165 6.53513 8H3.42308C2.63713 8 2 8.' +
-          '63713 2 9.42308C2 12.5031 4.49687 15 7.57692 15H8.8507C8.6564 14' +
-          '.5328 8.5 13.9409 8.5 13.2463C8.5 12.0481 9.16823 11.0368 9.9628' +
-          '8 10.3538C10.7782 9.65303 11.8684 9.16103 13.0639 9.01159C13.361' +
-          '3 8.97442 13.6568 8.95762 13.9459 8.95598C13.7341 8.72857 13.487' +
-          '5 8.53409 13.2144 8.38109C13.3049 8.25919 13.3885 8.13198 13.464' +
-          '9 8H15.1666C16.1791 8 16.9999 7.17919 16.9999 6.16667C16.9999 5.' +
-          '52233 16.4776 5 15.8333 5H13.874C13.4299 3.27477 11.8638 2 10 2Z' +
-          'M17.5 10.4999C17.6733 10.4999 17.8342 10.5896 17.9253 10.737C18.' +
-          '0164 10.8845 18.0247 11.0685 17.9472 11.2235C17.896 11.3259 17.8' +
-          '124 11.461 17.7287 11.5962L17.7125 11.6223C17.617 11.7767 17.505' +
-          '6 11.9571 17.3884 12.1635C17.1536 12.5766 16.9014 13.0833 16.727' +
-          '9 13.6471C16.6939 13.7574 16.6581 13.8847 16.619 14.0242C16.4628' +
-          ' 14.5807 16.2525 15.3301 15.8844 15.9605C15.6461 16.3685 15.3276' +
-          ' 16.7577 14.8878 17.044C14.4435 17.3332 13.9021 17.4999 13.25 17' +
-          '.4999C12.1909 17.4999 11.4424 16.966 10.9774 16.4651C10.7447 16.' +
-          '2145 10.5759 15.9655 10.4649 15.7791C10.4383 15.7345 10.4149 15.' +
-          '6932 10.3946 15.6559C9.78966 16.2682 9.33058 16.9571 8.94732 17.' +
-          '7236C8.82383 17.9706 8.52349 18.0707 8.2765 17.9472C8.02951 17.8' +
-          '237 7.9294 17.5234 8.0529 17.2764C8.80681 15.7686 9.83581 14.530' +
-          '5 11.488 13.5669C12.1516 13.1511 12.8888 12.7831 13.6858 12.4642' +
-          'C13.9422 12.3617 14.0669 12.0707 13.9643 11.8143C13.8618 11.5579' +
-          ' 13.5708 11.4332 13.3144 11.5358C11.8829 12.1084 10.5889 12.8493' +
-          ' 9.53801 13.7662C9.51384 13.6024 9.5 13.4289 9.5 13.2463C9.5 12.' +
-          '4822 9.8093 11.7342 10.4402 11.1457C11.0666 10.5612 11.9864 10.1' +
-          '54 13.188 10.0039C14.3855 9.85421 15.3828 9.98779 16.14 10.1565C' +
-          '16.4681 10.2296 16.7538 10.31 16.9812 10.3741L17.0761 10.4007C17' +
-          '.1994 10.4352 17.2962 10.4613 17.375 10.4789C17.4136 10.4875 17.' +
-          '4435 10.4931 17.4663 10.4964C17.4775 10.498 17.4859 10.4989 17.4' +
-          '919 10.4994C17.4975 10.4999 17.5 10.4999 17.5 10.4999Z" fill="#C' +
-          '0C0C0"/>'#13#10'<path d="M10 3C8.34315 3 7 4.34315 7 6C7 6.80363 7.315' +
-          '98 7.53345 7.83048 8.07201C7.93421 8.18059 8 8.32193 8 8.47209C8' +
-          ' 8.76365 7.76365 9 7.47209 9H3.42308C3.18942 9 3 9.18942 3 9.423' +
-          '08C3 11.9508 5.04916 14 7.57692 14H8.70287C8.75454 14.0891 8.815' +
-          '45 14.173 8.88494 14.2503C8.66507 14.4868 8.4597 14.7363 8.26501' +
-          ' 15H7.57692C4.49687 15 2 12.5031 2 9.42308C2 8.63713 2.63713 8 3' +
-          '.42308 8H6.53513C6.19479 7.41165 6 6.72857 6 6C6 3.79086 7.79086' +
-          ' 2 10 2C11.8638 2 13.4299 3.27477 13.874 5H15.8333C16.4777 5 17 ' +
-          '5.52233 17 6.16667C17 7.17919 16.1792 8 15.1667 8H13.4649C13.388' +
-          '5 8.13198 13.3049 8.2592 13.2144 8.38109C13.5768 8.58416 13.8928' +
-          ' 8.86028 14.1423 9.1895C13.7903 9.19449 13.4278 9.21609 13.0639 ' +
-          '9.26158C12.9757 9.2726 12.8887 9.28516 12.8028 9.29923C12.6012 9' +
-          '.17414 12.3757 9.08392 12.1347 9.03696C11.9249 8.99608 11.75 8.8' +
-          '2671 11.75 8.61294C11.75 8.48129 11.8178 8.35989 11.9226 8.28014' +
-          'C12.0073 8.21565 12.1087 8.13114 12.2026 8.03391L12.205 8.03428C' +
-          '12.478 7.73842 12.6923 7.38748 12.8293 7H15.1667C15.6269 7 16 6.' +
-          '6269 16 6.16667C16 6.07462 15.9254 6 15.8333 6H13C13 4.34315 11.' +
-          '6569 3 10 3ZM15.6574 11.1539C14.9433 11.0046 14.1437 10.8922 13.' +
-          '3119 10.9962C11.7434 11.1922 10.9306 12.2691 10.4639 13.4326C10.' +
-          '3611 13.6889 10.07 13.8133 9.81373 13.7105C9.55744 13.6077 9.433' +
-          '02 13.3165 9.53583 13.0603C10.0691 11.7308 11.1064 10.2641 13.18' +
-          '79 10.0039C14.1811 9.87971 15.1071 10.0172 15.862 10.175C16.087 ' +
-          '10.2221 16.3145 10.275 16.5186 10.3226C16.6443 10.3518 16.7612 1' +
-          '0.379 16.8632 10.4015C17.1581 10.4666 17.361 10.5 17.4999 10.5C1' +
-          '7.6732 10.5 17.8341 10.5897 17.9252 10.7371C18.0163 10.8845 18.0' +
-          '246 11.0686 17.9471 11.2236C17.8959 11.326 17.8122 11.4611 17.72' +
-          '86 11.5963L17.7124 11.6224C17.6169 11.7768 17.5055 11.9572 17.38' +
-          '83 12.1635C17.1535 12.5767 16.9013 13.0834 16.7277 13.6471C16.69' +
-          '38 13.7575 16.658 13.8848 16.6189 14.0243C16.4627 14.5809 16.252' +
-          '3 15.3302 15.8842 15.9606C15.646 16.3686 15.3275 16.7578 14.8877' +
-          ' 17.0441C14.4434 17.3333 13.902 17.5 13.2499 17.5C12.1841 17.5 1' +
-          '1.4222 16.939 10.9488 16.4221C10.7109 16.1623 10.5364 15.9043 10' +
-          '.4211 15.7114C10.4106 15.6937 10.4004 15.6764 10.3908 15.6598C9.' +
-          '78774 16.2711 9.32977 16.9587 8.94732 17.7236C8.82383 17.9706 8.' +
-          '52349 18.0707 8.2765 17.9472C8.02951 17.8237 7.9294 17.5234 8.05' +
-          '29 17.2764C9.11407 15.1541 10.7202 13.5663 13.842 12.5257C14.104' +
-          ' 12.4383 14.3871 12.5799 14.4745 12.8419C14.5618 13.1039 14.4202' +
-          ' 13.387 14.1582 13.4744C12.9067 13.8915 11.9358 14.3943 11.161 1' +
-          '4.9838C11.1681 14.9959 11.175 15.0085 11.1817 15.0217C11.2024 15' +
-          '.0626 11.235 15.1238 11.2796 15.1985C11.3695 15.349 11.5049 15.5' +
-          '487 11.6863 15.7467C12.0515 16.1454 12.5657 16.5 13.2499 16.5C13' +
-          '.7228 16.5 14.0718 16.382 14.3421 16.206C14.617 16.0271 14.8373 ' +
-          '15.7705 15.0207 15.4563C15.317 14.9489 15.4807 14.3699 15.6354 1' +
-          '3.8227C15.6806 13.6625 15.7252 13.505 15.772 13.3528C15.9749 12.' +
-          '694 16.2644 12.1174 16.5188 11.6695C16.5761 11.5688 16.6319 11.4' +
-          '74 16.6847 11.3861L16.6478 11.3781C16.5195 11.3498 16.3941 11.32' +
-          '05 16.266 11.2906C16.0757 11.2461 15.8791 11.2002 15.6574 11.153' +
-          '9Z" fill="black"/>'#13#10'</svg>'
-        ExplicitLeft = 17
-        ExplicitTop = -1
-        ExplicitWidth = 38
-        ExplicitHeight = 37
-      end
-    end
-    object pnlSettings: TPanel
-      AlignWithMargins = True
-      Left = 741
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alRight
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      ShowCaption = False
-      TabOrder = 3
-      StyleElements = [seFont, seBorder]
-      object svgSettings: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 35
-        Hint = 'Change Icon Backround (display only)'
-        Align = alClient
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = ClickSettings
-        Svg.Source = 
-          '<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://ww' +
-          'w.w3.org/2000/svg">'#10'<path d="M1.91099 7.38266C2.28028 6.24053 2.' +
-          '88863 5.19213 3.69133 4.30364C3.82707 4.15339 4.04002 4.09984 4.' +
-          '23069 4.16802L6.14897 4.85392C6.66905 5.03977 7.24131 4.76883 7.' +
-          '42716 4.24875C7.44544 4.19762 7.45952 4.14507 7.46925 4.09173L7.' +
-          '83471 2.08573C7.87104 1.88627 8.02422 1.7285 8.22251 1.6863C8.80' +
-          '27 1.5628 9.39758 1.5 10.0003 1.5C10.6026 1.5 11.1971 1.56273 11' +
-          '.7769 1.68607C11.9752 1.72824 12.1284 1.88591 12.1648 2.08529L12' +
-          '.5313 4.09165C12.6303 4.63497 13.1511 4.9951 13.6944 4.89601C13.' +
-          '7479 4.88627 13.8004 4.87219 13.8515 4.85395L15.7698 4.16802C15.' +
-          '9605 4.09984 16.1734 4.15339 16.3092 4.30364C17.1119 5.19213 17.' +
-          '7202 6.24053 18.0895 7.38266C18.1518 7.57534 18.0918 7.78658 17.' +
-          '9374 7.91764L16.3825 9.23773C15.9615 9.5952 15.9101 10.2263 16.2' +
-          '675 10.6473C16.3027 10.6887 16.3411 10.7271 16.3825 10.7623L17.9' +
-          '374 12.0824C18.0918 12.2134 18.1518 12.4247 18.0895 12.6173C17.7' +
-          '202 13.7595 17.1119 14.8079 16.3092 15.6964C16.1734 15.8466 15.9' +
-          '605 15.9002 15.7698 15.832L13.8515 15.1461C13.3315 14.9602 12.75' +
-          '92 15.2312 12.5733 15.7512C12.5551 15.8024 12.541 15.8549 12.531' +
-          '2 15.9085L12.1648 17.9147C12.1284 18.1141 11.9752 18.2718 11.776' +
-          '9 18.3139C11.1971 18.4373 10.6026 18.5 10.0003 18.5C9.39758 18.5' +
-          ' 8.8027 18.4372 8.22251 18.3137C8.02422 18.2715 7.87104 18.1137 ' +
-          '7.83471 17.9143L7.46926 15.9084C7.37018 15.365 6.8494 15.0049 6.' +
-          '30608 15.104C6.25265 15.1137 6.20011 15.1278 6.14906 15.1461L4.2' +
-          '3069 15.832C4.04002 15.9002 3.82707 15.8466 3.69133 15.6964C2.88' +
-          '863 14.8079 2.28028 13.7595 1.91099 12.6173C1.84869 12.4247 1.90' +
-          '876 12.2134 2.06313 12.0824L3.61798 10.7623C4.03897 10.4048 4.09' +
-          '046 9.77373 3.73299 9.35274C3.69784 9.31135 3.65937 9.27288 3.61' +
-          '8 9.23775L2.06313 7.91764C1.90876 7.78658 1.84869 7.57534 1.9109' +
-          '9 7.38266ZM2.97154 7.37709L4.26523 8.47546C4.34803 8.54576 4.424' +
-          '96 8.62269 4.49526 8.70548C5.2102 9.54746 5.10721 10.8096 4.2652' +
-          '1 11.5246L2.97154 12.6229C3.26359 13.4051 3.68504 14.1322 4.2164' +
-          '8 14.7751L5.81246 14.2044C5.91473 14.1679 6.01982 14.1397 6.1266' +
-          '7 14.1202C7.21332 13.922 8.25487 14.6423 8.45305 15.729L8.75702 ' +
-          '17.3975C9.16489 17.4655 9.58024 17.5 10.0003 17.5C10.42 17.5 10.' +
-          '8351 17.4656 11.2427 17.3976L11.5475 15.7289C11.567 15.6221 11.5' +
-          '951 15.517 11.6317 15.4147C12.0034 14.3746 13.1479 13.8327 14.18' +
-          '81 14.2044L15.784 14.7751C16.3155 14.1322 16.7369 13.4051 17.029' +
-          ' 12.6229L15.7353 11.5245C15.6525 11.4542 15.5756 11.3773 15.5053' +
-          ' 11.2945C14.7903 10.4525 14.8933 9.1904 15.7353 8.47544L17.029 7' +
-          '.37709C16.7369 6.59486 16.3155 5.86783 15.784 5.22494L14.1881 5.' +
-          '79559C14.0858 5.83214 13.9807 5.8603 13.8738 5.87979C12.7872 6.0' +
-          '7796 11.7456 5.3577 11.5475 4.27119L11.2427 2.60235C10.8351 2.53' +
-          '443 10.42 2.5 10.0003 2.5C9.58024 2.5 9.16489 2.53448 8.75702 2.' +
-          '60249L8.45304 4.27105C8.43355 4.37791 8.40539 4.48299 8.36884 4.' +
-          '58527C7.99714 5.62542 6.8526 6.1673 5.81237 5.79556L4.21648 5.22' +
-          '494C3.68504 5.86783 3.26359 6.59486 2.97154 7.37709ZM7.50026 10C' +
-          '7.50026 8.61929 8.61954 7.5 10.0003 7.5C11.381 7.5 12.5003 8.619' +
-          '29 12.5003 10C12.5003 11.3807 11.381 12.5 10.0003 12.5C8.61954 1' +
-          '2.5 7.50026 11.3807 7.50026 10ZM8.50026 10C8.50026 10.8284 9.171' +
-          '83 11.5 10.0003 11.5C10.8287 11.5 11.5003 10.8284 11.5003 10C11.' +
-          '5003 9.17157 10.8287 8.5 10.0003 8.5C9.17183 8.5 8.50026 9.17157' +
-          ' 8.50026 10Z"/>'#10'</svg>'
-        ExplicitLeft = 3
-        ExplicitTop = 3
-        ExplicitWidth = 40
-      end
-    end
-    object pnlBackColor: TPanel
-      AlignWithMargins = True
-      Left = 649
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alRight
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      ShowCaption = False
-      TabOrder = 4
-      StyleElements = [seFont, seBorder]
-      OnClick = ClickBackColor
-      ExplicitLeft = 695
-      object svgBackColor: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 20
-        Hint = 'Change Icon Backround (display only)'
-        Align = alTop
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = ClickBackColor
-        Svg.Source = 
-          '<svg width="15" height="15" viewBox="0 0 20 20" xmlns="http://ww' +
-          'w.w3.org/2000/svg">'#13#10'<path d="M8.94564 0.0549927C6.74682 0.28583' +
-          '4 4.60989 1.24382 2.92475 2.92896C1.23961 4.6141 0.281623 6.7510' +
-          '3 0.0507812 8.94985L8.94564 0.0549927ZM0.187287 11.9529L11.9487 ' +
-          '0.191497C12.7562 0.35151 13.5479 0.611816 14.3036 0.972415L0.968' +
-          '203 14.3078C0.607604 13.5521 0.347298 12.7604 0.187287 11.9529ZM' +
-          '2.17825 16.2373C2.40881 16.5255 2.65765 16.804 2.92475 17.0711C3' +
-          '.19237 17.3387 3.47139 17.588 3.76024 17.8189L17.8147 3.76445C17' +
-          '.5838 3.4756 17.3345 3.19658 17.0669 2.92896C16.7998 2.66186 16.' +
-          '5213 2.41302 16.2331 2.18246L2.17825 16.2373ZM19.0244 5.69432L5.' +
-          '69011 19.0286C6.44697 19.3896 7.23982 19.6499 8.04861 19.8097L19' +
-          '.8055 8.05282C19.6457 7.24404 19.3853 6.45118 19.0244 5.69432ZM1' +
-          '9.9401 11.0578L11.0536 19.9443C13.2497 19.712 15.3837 18.7543 17' +
-          '.0669 17.0711C18.7501 15.3879 19.7078 13.2539 19.9401 11.0578Z" ' +
-          'fill="silver"/>'#13#10#13#10'<path d="M9.99738 2C5.58055 2 2 5.58055 2 9.9' +
-          '9738C2 14.4142 5.58055 17.9948 9.99738 17.9948C14.4142 17.9948 1' +
-          '7.9948 14.4142 17.9948 9.99738C17.9948 5.58055 14.4142 2 9.99738' +
-          ' 2ZM0 9.99738C0 4.47598 4.47598 0 9.99738 0C15.5188 0 19.9948 4.' +
-          '47598 19.9948 9.99738C19.9948 15.5188 15.5188 19.9948 9.99738 19' +
-          '.9948C4.47598 19.9948 0 15.5188 0 9.99738Z" fill="current"/>'#13#10'</' +
-          'svg>'
-        ExplicitLeft = 2
-      end
-      object lblBackColor: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 20
-        Width = 30
-        Height = 15
-        Margins.Bottom = 0
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Back'
-        OnClick = ClickBackColor
-        ExplicitWidth = 25
-      end
-    end
-    object pnlFillColor: TPanel
-      AlignWithMargins = True
-      Left = 557
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alRight
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      PopupMenu = pmFill
-      ShowCaption = False
-      TabOrder = 5
-      StyleElements = [seFont, seBorder]
-      OnClick = ClickFillColor
-      ExplicitLeft = 603
-      object svgFillColor: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 20
-        Hint = 'Change Icon Backround (display only)'
-        Align = alTop
-        ParentShowHint = False
-        PopupMenu = pmFill
-        ShowHint = True
-        OnClick = ClickFillColor
-        Svg.Source = 
-          '<svg width="15" height="15" viewBox="0 0 20 20" xmlns="http://ww' +
-          'w.w3.org/2000/svg">'#10'<path d="M8.94564 0.0549927C6.74682 0.285834' +
-          ' 4.60989 1.24382 2.92475 2.92896C1.23961 4.6141 0.281623 6.75103' +
-          ' 0.0507812 8.94985L8.94564 0.0549927ZM0.187287 11.9529L11.9487 0' +
-          '.191497C12.7562 0.35151 13.5479 0.611816 14.3036 0.972415L0.9682' +
-          '03 14.3078C0.607604 13.5521 0.347298 12.7604 0.187287 11.9529ZM2' +
-          '.17825 16.2373C2.40881 16.5255 2.65765 16.804 2.92475 17.0711C3.' +
-          '19237 17.3387 3.47139 17.588 3.76024 17.8189L17.8147 3.76445C17.' +
-          '5838 3.4756 17.3345 3.19658 17.0669 2.92896C16.7998 2.66186 16.5' +
-          '213 2.41302 16.2331 2.18246L2.17825 16.2373ZM19.0244 5.69432L5.6' +
-          '9011 19.0286C6.44697 19.3896 7.23982 19.6499 8.04861 19.8097L19.' +
-          '8055 8.05282C19.6457 7.24404 19.3853 6.45118 19.0244 5.69432ZM19' +
-          '.9401 11.0578L11.0536 19.9443C13.2497 19.712 15.3837 18.7543 17.' +
-          '0669 17.0711C18.7501 15.3879 19.7078 13.2539 19.9401 11.0578Z" f' +
-          'ill="silver"/>'#10#10'<path d="M9.99738 2C5.58055 2 2 5.58055 2 9.9973' +
-          '8C2 14.4142 5.58055 17.9948 9.99738 17.9948C14.4142 17.9948 17.9' +
-          '948 14.4142 17.9948 9.99738C17.9948 5.58055 14.4142 2 9.99738 2Z' +
-          'M0 9.99738C0 4.47598 4.47598 0 9.99738 0C15.5188 0 19.9948 4.475' +
-          '98 19.9948 9.99738C19.9948 15.5188 15.5188 19.9948 9.99738 19.99' +
-          '48C4.47598 19.9948 0 15.5188 0 9.99738Z" fill="current"/>'#10'</svg>'
-      end
-      object lblFillColor: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 20
-        Width = 30
-        Height = 15
-        Margins.Bottom = 0
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Fill'
-        PopupMenu = pmFill
-        OnClick = ClickFillColor
-        ExplicitWidth = 15
-      end
-    end
-    object pnlToneColor: TPanel
-      AlignWithMargins = True
-      Left = 603
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alRight
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      ShowCaption = False
-      TabOrder = 6
-      Visible = False
-      StyleElements = [seFont, seBorder]
-      OnClick = ClickToneColor
-      ExplicitLeft = 649
-      object svgToneColor: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 20
-        Hint = 'Change Icon Backround (display only)'
-        Align = alTop
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = ClickToneColor
-        Svg.Source = 
-          '<svg width="15" height="15" viewBox="0 0 20 20" xmlns="http://ww' +
-          'w.w3.org/2000/svg">'#13#10'<path d="M8.94564 0.0549927C6.74682 0.28583' +
-          '4 4.60989 1.24382 2.92475 2.92896C1.23961 4.6141 0.281623 6.7510' +
-          '3 0.0507812 8.94985L8.94564 0.0549927ZM0.187287 11.9529L11.9487 ' +
-          '0.191497C12.7562 0.35151 13.5479 0.611816 14.3036 0.972415L0.968' +
-          '203 14.3078C0.607604 13.5521 0.347298 12.7604 0.187287 11.9529ZM' +
-          '2.17825 16.2373C2.40881 16.5255 2.65765 16.804 2.92475 17.0711C3' +
-          '.19237 17.3387 3.47139 17.588 3.76024 17.8189L17.8147 3.76445C17' +
-          '.5838 3.4756 17.3345 3.19658 17.0669 2.92896C16.7998 2.66186 16.' +
-          '5213 2.41302 16.2331 2.18246L2.17825 16.2373ZM19.0244 5.69432L5.' +
-          '69011 19.0286C6.44697 19.3896 7.23982 19.6499 8.04861 19.8097L19' +
-          '.8055 8.05282C19.6457 7.24404 19.3853 6.45118 19.0244 5.69432ZM1' +
-          '9.9401 11.0578L11.0536 19.9443C13.2497 19.712 15.3837 18.7543 17' +
-          '.0669 17.0711C18.7501 15.3879 19.7078 13.2539 19.9401 11.0578Z" ' +
-          'fill="silver"/>'#13#10#13#10'<path d="M9.99738 2C5.58055 2 2 5.58055 2 9.9' +
-          '9738C2 14.4142 5.58055 17.9948 9.99738 17.9948C14.4142 17.9948 1' +
-          '7.9948 14.4142 17.9948 9.99738C17.9948 5.58055 14.4142 2 9.99738' +
-          ' 2ZM0 9.99738C0 4.47598 4.47598 0 9.99738 0C15.5188 0 19.9948 4.' +
-          '47598 19.9948 9.99738C19.9948 15.5188 15.5188 19.9948 9.99738 19' +
-          '.9948C4.47598 19.9948 0 15.5188 0 9.99738Z" fill="current"/>'#13#10'</' +
-          'svg>'
-      end
-      object lblToneColor: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 20
-        Width = 30
-        Height = 15
-        Margins.Bottom = 0
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Tone'
-        OnClick = ClickToneColor
-        ExplicitWidth = 25
-      end
-    end
-    object pnlSelectLibrary: TPanel
+    object lstLibrary: TControlList
       AlignWithMargins = True
       Left = 3
       Top = 3
       Width = 40
-      Height = 39
+      Height = 40
+      Margins.Bottom = 2
       Align = alLeft
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      ParentBackground = False
-      ShowCaption = False
-      TabOrder = 7
-      StyleElements = [seFont, seBorder]
-      object svgSelectLibrary: TSkSvg
+      BorderStyle = bsNone
+      Color = clBtnFace
+      ItemCount = 1
+      ItemWidth = 40
+      ItemHeight = 40
+      ItemMargins.Left = 0
+      ItemMargins.Top = 0
+      ItemMargins.Right = 0
+      ItemMargins.Bottom = 0
+      ColumnLayout = cltMultiLeftToRight
+      ParentColor = False
+      TabOrder = 3
+      object shpLibBorder: TShape
         Left = 0
         Top = 0
-        Width = 36
-        Height = 35
-        Hint = 'Select Icon Library'
+        Width = 40
+        Height = 40
+        Brush.Style = bsClear
+        Pen.Color = clSilver
+        Pen.Width = 2
+      end
+      object svgLibrary: TSkSvg
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 34
+        Height = 34
+        Hint = 'Show Regular Icons'
         Align = alClient
         ParentShowHint = False
         ShowHint = True
@@ -597,126 +350,13 @@ object Form4: TForm4
         ExplicitHeight = 31
       end
     end
-    object pnlSearchInfo: TPanel
-      Left = 192
-      Top = 1
-      Width = 151
-      Height = 41
-      BevelOuter = bvNone
-      Caption = 'pnlSearchInfo'
-      ShowCaption = False
-      TabOrder = 8
-      object lblAvailableIconCount: TLabel
-        Left = 105
-        Top = -1
-        Width = 35
-        Height = 17
-        Alignment = taRightJustify
-        AutoSize = False
-        Caption = '00000'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI Semibold'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblAvailableIconsCaption: TLabel
-        Left = 10
-        Top = -1
-        Width = 89
-        Height = 17
-        Caption = 'Available Icons:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Shape1: TShape
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 2
-        Height = 35
-        Align = alLeft
-        Pen.Color = clSilver
-        ExplicitLeft = 219
-        ExplicitHeight = 39
-      end
-      object Shape2: TShape
-        AlignWithMargins = True
-        Left = 146
-        Top = 3
-        Width = 2
-        Height = 35
-        Align = alRight
-        Pen.Color = clSilver
-        ExplicitLeft = 361
-        ExplicitHeight = 39
-      end
-      object SearchBox1: TSearchBox
-        Left = 10
-        Top = 17
-        Width = 131
-        Height = 23
-        TabOrder = 0
-        TextHint = 'Name Search'
-        OnInvokeSearch = SearchBox1InvokeSearch
-      end
-    end
-    object pnlImageCollection: TPanel
-      AlignWithMargins = True
-      Left = 695
-      Top = 3
-      Width = 40
-      Height = 39
-      Align = alRight
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      ShowCaption = False
-      TabOrder = 9
-      StyleElements = [seFont, seBorder]
-      object svgImageCollection: TSkSvg
-        Left = 0
-        Top = 0
-        Width = 36
-        Height = 35
-        Hint = 'Copy as TImageCollection to Clipboard'
-        Align = alClient
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = ClickGenerateCollection
-        Svg.Source = 
-          '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><pat' +
-          'h d="M11.5 7.5C12.0523 7.5 12.5 7.05228 12.5 6.5C12.5 5.94772 12' +
-          '.0523 5.5 11.5 5.5C10.9477 5.5 10.5 5.94772 10.5 6.5C10.5 7.0522' +
-          '8 10.9477 7.5 11.5 7.5ZM3 6C3 4.34315 4.34315 3 6 3H12C13.6569 3' +
-          ' 15 4.34315 15 6V12C15 13.6569 13.6569 15 12 15H6C4.34315 15 3 1' +
-          '3.6569 3 12V6ZM6 4C4.89543 4 4 4.89543 4 6V12C4 12.3709 4.10096 ' +
-          '12.7182 4.27691 13.016L7.58576 9.70712C8.36681 8.92608 9.63314 8' +
-          '.92608 10.4142 9.70712L13.7231 13.016C13.899 12.7182 14 12.3709 ' +
-          '14 12V6C14 4.89543 13.1046 4 12 4H6ZM9.70708'#13#10' 10.4142C9.31656 1' +
-          '0.0237 8.68339 10.0237 8.29287 10.4142L4.98401 13.7231C5.28177 1' +
-          '3.899 5.62909 14 6 14H12C12.3709 14 12.7182 13.899 13.016 13.723' +
-          '1L9.70708 10.4142ZM8.00002 17C7.11152 17 6.31324 16.6138 5.76392' +
-          ' 16H12.5C14.3122 16 15.8027 14.6228 15.982 12.8579C15.9939 12.74' +
-          '02 16 12.6208 16 12.5V5.76392C16.6138 6.31324 17 7.11152 17 8.00' +
-          '002V12.5C17 14.9853 14.9853 17 12.5 17H8.00002Z"/></svg>'
-        ExplicitLeft = 3
-        ExplicitTop = 3
-        ExplicitWidth = 40
-      end
-    end
   end
   object ControlList1: TControlList
     AlignWithMargins = True
     Left = 3
-    Top = 45
+    Top = 48
     Width = 778
-    Height = 486
-    Margins.Top = 0
+    Height = 483
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -736,8 +376,6 @@ object Form4: TForm4
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
-    ExplicitLeft = -2
-    ExplicitTop = 44
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
@@ -1585,8 +1223,8 @@ object Form4: TForm4
               4110FC185575034A44E8C5F6C912BC0000000049454E44AE426082}
           end>
       end>
-    Left = 592
-    Top = 144
+    Left = 144
+    Top = 136
   end
   object VirtualImageList1: TVirtualImageList
     Images = <
@@ -1628,13 +1266,13 @@ object Form4: TForm4
     ImageCollection = ImageCollection1
     Width = 20
     Height = 20
-    Left = 560
-    Top = 216
+    Left = 112
+    Top = 208
   end
   object pmFill: TPopupMenu
     Images = VirtualImageList1
-    Left = 560
-    Top = 72
+    Left = 112
+    Top = 64
     object pmSelectFillNone: TMenuItem
       Caption = 'Select Fill None'
       ImageIndex = 0
