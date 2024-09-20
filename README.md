@@ -1,6 +1,6 @@
 # SVGIconViewer v1.2
 
-![Picture of application UI](./images/Screenshot 2024-09-20 114038.png "Screen Capture")
+![Picture of application UI](./images/Screenshot_2024-09-20_114038.png "Screen Capture")
 
 A simple windows based viewer containing over 43,900 individual SVG icons with the ability to copy
 and export individual icons for use in other projects.  Two-tone ability was added
