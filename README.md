@@ -2,7 +2,7 @@
 
 ![Picture of application UI](./images/Screenshot_2024-09-20_114038.png "Screen Capture")
 
-A simple windows based viewer containing over 43,900 individual SVG icons with the ability to copy
+A simple windows based viewer containing over 46,500 individual SVG icons with the ability to copy
 and export individual icons for use in other projects.  Two-tone ability was added
 to render icons using both the outline and filled versions where there is a match.
 
@@ -12,9 +12,9 @@ into a Delphi image collection.
 Specifying a user folder will allow the system to create a TImageCollection component, allowing
 quick pasting into your project as converted PNG files.
 
-This project includes icons from the [Microsoft fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
-and the [tabler-icons](https://github.com/tabler/tabler-icons) public repositories. Please see the appopriate library
-for copyright and license information.
+This project includes icons from the [Microsoft fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons),
+the [tabler-icons](https://github.com/tabler/tabler-icons) and [Bootstrap Icons](https://github.com/twbs/icons) public repositories. Please see the appopriate library
+for copyright and license information (currently all are MIT licensed).
 
 ## Support
 
