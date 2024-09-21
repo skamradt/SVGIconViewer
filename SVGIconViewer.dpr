@@ -92,7 +92,8 @@ uses
   svgIcons.BootstrapOutline16.names in 'IconLibrary\svgIcons.BootstrapOutline16.names.pas',
   svgIcons.BootstrapOutline16 in 'IconLibrary\svgIcons.BootstrapOutline16.pas',
   svgIcons.BootstrapOutline16.source in 'IconLibrary\svgIcons.BootstrapOutline16.source.pas',
-  IconCollections.Bootstrap in 'IconCollections\IconCollections.Bootstrap.pas';
+  IconCollections.Bootstrap in 'IconCollections\IconCollections.Bootstrap.pas',
+  svgIcons.BootstrapTwoTone in 'IconLibrary\svgIcons.BootstrapTwoTone.pas';
 
 {$R *.res}
 

@@ -376,6 +376,7 @@ object Form4: TForm4
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
+    ExplicitLeft = -2
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
@@ -408,6 +409,12 @@ object Form4: TForm4
     OnPopup = pmIconPopup
     Left = 480
     Top = 104
+    object mniCopyIconName: TMenuItem
+      Caption = 'Copy Icon Name'
+      ImageIndex = 4
+      ImageName = 'Copy'
+      OnClick = mniCopyIconNameClick
+    end
     object mniCopySvgClipboard: TMenuItem
       Caption = 'Copy SVG to Clipboard'
       ImageIndex = 5

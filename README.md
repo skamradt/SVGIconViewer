@@ -63,6 +63,11 @@ Because the program makes heavy use of multi-line string constants, the project 
 
 ## Release History
 
+September 21, 2024 - 1.2.1
+* Updated generation to properly categorize a few filled bootstrap icons that were showing in the outline list.
+* Corrected issues where a few bootstrap icons were missing or did not align properly when rendered as Two Tone. This adds 118 icons to the bootstrap Two Tone list.
+* Changing to a different icon list will now clear the icon selection.
+
 September 19, 2024 - 1.2
 * Replaced toolbar panels with TControlLists for a better UI experience.
 * Removed duplicate solid filled icons from the tabler-icons alternate strokes collections.

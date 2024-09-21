@@ -20,7 +20,7 @@ uses
   System.Sysutils,
   svgIcons.BootstrapOutline16,
   svgIcons.BootstrapFilled16,
-  svgIcons.FluentUITwoTone;
+  svgIcons.BootstrapTwoTone;
 
 { TBootstrapIcons16 }
 
@@ -39,7 +39,7 @@ begin
   case ListType of
     ltOutline : Result := TBootstrapOutline16IconList.create;
     ltFilled : Result := TBootstrapFilled16IconList.create;
-    ltTwoTone : Result := TFluentUITwoToneIconList.Create(TBootstrapFilled16IconList.create,TBootstrapOutline16IconList.create);
+    ltTwoTone : Result := TBootstrapTwoToneIconList.Create(TBootstrapFilled16IconList.create,TBootstrapOutline16IconList.create);
   end;
 end;
 

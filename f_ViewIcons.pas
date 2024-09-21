@@ -49,6 +49,7 @@ type
     lstLibrary: TControlList;
     shpLibBorder: TShape;
     svgLibrary: TSkSvg;
+    mniCopyIconName: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure svgRegularClick(Sender: TObject);
     procedure svgFilledClick(Sender: TObject);
@@ -77,6 +78,7 @@ type
     procedure lstIconTypesItemClick(Sender: TObject);
     procedure lstIconTypesEnableItem(const AIndex: Integer;
       var AEnabled: Boolean);
+    procedure mniCopyIconNameClick(Sender: TObject);
   private
     fFillColor : TColor;
     fToneColor : TColor;
@@ -340,6 +342,12 @@ begin
   end;
 end;
 
+procedure TForm4.mniCopyIconNameClick(Sender: TObject);
+begin
+  if ControlList1.ItemIndex <> -1 then
+    Clipboard.AsText := fList.name[ControlList1.ItemIndex];
+end;
+
 procedure TForm4.mniCopySvgClipboardClick(Sender: TObject);
 begin
   if (ControlList1.itemindex > -1) then
@@ -440,6 +448,7 @@ end;
 
 procedure TForm4.pmIconPopup(Sender: TObject);
 begin
+  mniCopyIconName.enabled := ControlList1.ItemIndex <> -1;
   mniCopySvgClipboard.enabled := ControlList1.itemindex <> -1;
   mniSaveSVGFile.enabled := ControlList1.itemindex <> -1;
   mniSavePNGToFile.enabled := ControlList1.itemindex <> -1;
@@ -664,6 +673,7 @@ end;
 procedure TForm4.Updatelist;
 begin
   lblAvailableIconCount.caption := IntToSTr(fList.Count);
+  ControlList1.Itemindex := -1;
   ControlList1.ItemCount := fList.Count;
   ControlList1.Invalidate;
 end;
