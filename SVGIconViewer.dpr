@@ -100,7 +100,6 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Windows11 Modern Light');
   Application.CreateForm(TForm4, Form4);
   Application.Run;
 end.
