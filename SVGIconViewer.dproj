@@ -140,7 +140,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="f_ViewIcons.pas">
-            <Form>Form4</Form>
+            <Form>ViewIconsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="svgViewer.Types.pas"/>

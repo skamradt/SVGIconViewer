@@ -60,9 +60,7 @@ end;
 
 function TBootstrapFilled16IconList.GetSource(Index:Integer):string;
 var
-  svg : string;
-  var
-    sColor : string;
+  sColor : string;
 begin
   if index > c_icon_count then
     raise EArgumentOutOfRangeException.Create('Requested icon index is out of range');

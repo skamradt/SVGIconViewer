@@ -168,7 +168,7 @@ end;
 
 function TRightToolbarController.GetBackColor: TColor;
 begin
-
+  Result := fBackColor;
 end;
 
 function TRightToolbarController.GetButtonEvent(
@@ -179,22 +179,22 @@ end;
 
 function TRightToolbarController.GetCopyCodeEnabled: boolean;
 begin
-
+  Result := fCopyCodeVisible;
 end;
 
 function TRightToolbarController.GetFillColor: TColor;
 begin
-
+  Result := fFillColor;
 end;
 
 function TRightToolbarController.GetToneColor: TColor;
 begin
-
+  Result := fToneColor;
 end;
 
 function TRightToolbarController.GetToneColorEnabled: Boolean;
 begin
-
+  Result := fToneVisible;
 end;
 
 procedure TRightToolbarController.OnBeforeDrawItem(AIndex: Integer;

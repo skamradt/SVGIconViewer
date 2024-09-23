@@ -2,7 +2,7 @@ program SVGIconViewer;
 
 uses
   Vcl.Forms,
-  f_ViewIcons in 'f_ViewIcons.pas' {Form4},
+  f_ViewIcons in 'f_ViewIcons.pas' {ViewIconsForm},
   Vcl.Themes,
   Vcl.Styles,
   svgViewer.Types in 'svgViewer.Types.pas',
@@ -100,6 +100,6 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm4, Form4);
+  Application.CreateForm(TViewIconsForm, ViewIconsForm);
   Application.Run;
 end.

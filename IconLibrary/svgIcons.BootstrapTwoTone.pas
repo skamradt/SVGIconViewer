@@ -131,6 +131,7 @@ begin
   CIdx := 0;
   iMap := 0;
   ExceptionIdx := 0;
+  LastCorrectionIdx := 0;
   SetLength(ExceptionVal,Length(FillExceptionsA));
   SetLength(fMapping,Max(fFilledList.Count,fOutlineList.count));
   while (iFidx < fFilledList.count) and (iOIdx < fOutlineList.Count) do

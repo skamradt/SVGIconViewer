@@ -13,7 +13,7 @@ const
   C_CAPTION = 'SVG Icon Viewer';
 
 type
-  TForm4 = class(TForm)
+  TViewIconsForm = class(TForm)
     pnlToolbar: TPanel;
     ControlList1: TControlList;
     svgIcon: TSkSvg;
@@ -99,7 +99,6 @@ type
     procedure SelectFilled;
     procedure SelectTwoTone;
     procedure Updatelist;
-    procedure UpdateColorSvg(aSvg:TSkSvg;aColor:TColor);
     procedure SetList(Value:ISVGIconList);
     procedure SelectCollection(Sender:TObject);
     procedure CountAllIcons;
@@ -109,7 +108,7 @@ type
   end;
 
 var
-  Form4: TForm4;
+  ViewIconsForm: TViewIconsForm;
 
 implementation
 
@@ -134,7 +133,7 @@ uses
 
 {$R *.dfm}
 
-procedure TForm4.ClickFillColor(Sender: TObject);
+procedure TViewIconsForm.ClickFillColor(Sender: TObject);
 var
   pt : TPoint;
 begin
@@ -142,7 +141,7 @@ begin
   pmFill.Popup(pt.X,pt.Y);
 end;
 
-procedure TForm4.ClickGenerateCollection(Sender: TObject);
+procedure TViewIconsForm.ClickGenerateCollection(Sender: TObject);
 var
   Obj : IUnknown;
 begin
@@ -153,7 +152,7 @@ begin
   ShowMessage('A TImageCollection Component containing all SVG images in the user directory which were then converted to PNG images was copied to clipboard.');
 end;
 
-procedure TForm4.ClickSettings(Sender: TObject);
+procedure TViewIconsForm.ClickSettings(Sender: TObject);
 var
   dlg  : TViewIconsConfigDlg;
   bNewUserDir : boolean;
@@ -187,7 +186,7 @@ begin
   end;
 end;
 
-procedure TForm4.ClickToneColor(Sender: TObject);
+procedure TViewIconsForm.ClickToneColor(Sender: TObject);
 begin
   dlgColor.color := fToneColor;
   dlgColor.Tag := 2;
@@ -198,21 +197,20 @@ begin
     end;
 end;
 
-procedure TForm4.ControlList1BeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+procedure TViewIconsForm.ControlList1BeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
   ARect: TRect; AState: TOwnerDrawState);
 begin
   svgIcon.svg.source := fList.Source[aindex];
 end;
 
-procedure TForm4.ControlList1ItemClick(Sender: TObject);
+procedure TViewIconsForm.ControlList1ItemClick(Sender: TObject);
 begin
   Statusbar1.SimpleText := '  '+fList.Name[ControlLIst1.ItemIndex];
 end;
 
-procedure TForm4.CountAllIcons;
+procedure TViewIconsForm.CountAllIcons;
 var
   aCollection : ISVGLibraryCollection;
-  aList : ISVGIconList;
   Ix, Count : integer;
 begin
   Count := 0;
@@ -232,7 +230,7 @@ begin
   StatusBar1.SimpleText := Format('  There are a total of %.0n available icons!',[count+0.0]);
 end;
 
-procedure TForm4.dlgColorShow(Sender: TObject);
+procedure TViewIconsForm.dlgColorShow(Sender: TObject);
 begin
   case dlgColor.Tag of
     0 : SendMessage(dlgColor.Handle, WM_SETTEXT, 0, Longint(PChar('Set Background Color')));
@@ -241,7 +239,7 @@ begin
   end;
 end;
 
-procedure TForm4.FormCreate(Sender: TObject);
+procedure TViewIconsForm.FormCreate(Sender: TObject);
 begin
   // service registrations
   fSettings := TSettings.create;
@@ -275,14 +273,14 @@ begin
   CountAllIcons;
 end;
 
-procedure TForm4.FormDestroy(Sender: TObject);
+procedure TViewIconsForm.FormDestroy(Sender: TObject);
 begin
   fSettings.SetOptionInt('collection',fCollectionIdx);
   fSettings.SetOptionInt('style',ord(fStyle));
   SaveFormPosition;
 end;
 
-procedure TForm4.LibraryClick(Sender: TObject);
+procedure TViewIconsForm.LibraryClick(Sender: TObject);
 var
   pt : TPoint;
 begin
@@ -291,7 +289,7 @@ begin
   lstLibrary.ItemIndex := -1;
 end;
 
-procedure TForm4.LoadFormPosition;
+procedure TViewIconsForm.LoadFormPosition;
 begin
   width := fSettings.GetOptionIntDefault('mainform.width',width);
   if Width > screen.Width then
@@ -307,7 +305,7 @@ begin
     Top := (Screen.Height DIV 2) - (height DIV 2);
 end;
 
-procedure TForm4.lstIconTypesBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+procedure TViewIconsForm.lstIconTypesBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
   ARect: TRect; AState: TOwnerDrawState);
 const
   C_SVG = '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">';
@@ -323,7 +321,7 @@ begin
   end;
 end;
 
-procedure TForm4.lstIconTypesEnableItem(const AIndex: Integer;
+procedure TViewIconsForm.lstIconTypesEnableItem(const AIndex: Integer;
   var AEnabled: Boolean);
 begin
   case aIndex of
@@ -333,7 +331,7 @@ begin
   end;
 end;
 
-procedure TForm4.lstIconTypesItemClick(Sender: TObject);
+procedure TViewIconsForm.lstIconTypesItemClick(Sender: TObject);
 begin
   case lstIconTypes.Itemindex of
     0 : SelectRegular;
@@ -342,19 +340,19 @@ begin
   end;
 end;
 
-procedure TForm4.mniCopyIconNameClick(Sender: TObject);
+procedure TViewIconsForm.mniCopyIconNameClick(Sender: TObject);
 begin
   if ControlList1.ItemIndex <> -1 then
     Clipboard.AsText := fList.name[ControlList1.ItemIndex];
 end;
 
-procedure TForm4.mniCopySvgClipboardClick(Sender: TObject);
+procedure TViewIconsForm.mniCopySvgClipboardClick(Sender: TObject);
 begin
   if (ControlList1.itemindex > -1) then
     Clipboard.asText := fList.Source[ControlList1.itemindex];
 end;
 
-procedure TForm4.mniSavePNGToFileClick(Sender: TObject);
+procedure TViewIconsForm.mniSavePNGToFileClick(Sender: TObject);
 var
   LBitmap : TBitmap;
   pngImg : TWICImage;
@@ -427,7 +425,7 @@ begin
   end;
 end;
 
-procedure TForm4.mniSaveSVGFileClick(Sender: TObject);
+procedure TViewIconsForm.mniSaveSVGFileClick(Sender: TObject);
 var
   mres : TModalREsult;
 begin
@@ -446,7 +444,7 @@ begin
   until mRes in [mrCancel,mrYes];
 end;
 
-procedure TForm4.pmIconPopup(Sender: TObject);
+procedure TViewIconsForm.pmIconPopup(Sender: TObject);
 begin
   mniCopyIconName.enabled := ControlList1.ItemIndex <> -1;
   mniCopySvgClipboard.enabled := ControlList1.itemindex <> -1;
@@ -454,7 +452,7 @@ begin
   mniSavePNGToFile.enabled := ControlList1.itemindex <> -1;
 end;
 
-procedure TForm4.pmLibraryPopup(Sender: TObject);
+procedure TViewIconsForm.pmLibraryPopup(Sender: TObject);
 var
   ix : integer;
   mitem : TMenuItem;
@@ -476,7 +474,7 @@ begin
     end;
 end;
 
-procedure TForm4.SaveFormPosition;
+procedure TViewIconsForm.SaveFormPosition;
 begin
   fSettings.SetOptionInt('mainform.width',width);
   fSettings.SetoptionInt('mainform.height',height);
@@ -484,7 +482,7 @@ begin
   fSettings.SetOptionInt('mainform.top',top);
 end;
 
-procedure TForm4.SearchBox1InvokeSearch(Sender: TObject);
+procedure TViewIconsForm.SearchBox1InvokeSearch(Sender: TObject);
 var
   SearchList : ISVGSearchList;
 begin
@@ -497,7 +495,7 @@ begin
   ControlList1.Invalidate;
 end;
 
-procedure TForm4.pmSelectFillColorClick(Sender: TObject);
+procedure TViewIconsForm.pmSelectFillColorClick(Sender: TObject);
 begin
   dlgColor.color := fFillColor;
   dlgColor.Tag := 1;
@@ -508,13 +506,13 @@ begin
     end;
 end;
 
-procedure TForm4.pmSelectFillNoneClick(Sender: TObject);
+procedure TViewIconsForm.pmSelectFillNoneClick(Sender: TObject);
 begin
   SetFillColor(clNone);
   fSettings.SetOptionColor('fillcolor',fFillColor);
 end;
 
-procedure TForm4.SelectCollection(Sender: TObject);
+procedure TViewIconsForm.SelectCollection(Sender: TObject);
 var
   FolderList : ISVGUserFolderList;
   bShowImageCollection : boolean;
@@ -545,7 +543,7 @@ begin
   lstIconTypes.Invalidate;
 end;
 
-procedure TForm4.SelectFilled;
+procedure TViewIconsForm.SelectFilled;
 begin
   fStyle := ltFilled;
   lstIconTypes.itemIndex := 1;
@@ -555,7 +553,7 @@ begin
   UpdateList;
 end;
 
-procedure TForm4.SelectRegular;
+procedure TViewIconsForm.SelectRegular;
 begin
   fStyle := ltOutline;
   lstIconTypes.itemIndex := 0;
@@ -565,7 +563,7 @@ begin
   UpdateList;
 end;
 
-procedure TForm4.SelectTwoTone;
+procedure TViewIconsForm.SelectTwoTone;
 var
   IconTone : ISVGTwoToneIconList;
 begin
@@ -579,13 +577,13 @@ begin
   UpdateList;
 end;
 
-procedure TForm4.SetBackColor(Value: TColor);
+procedure TViewIconsForm.SetBackColor(Value: TColor);
 begin
   ControlList1.Color := Value;
   fRightToolbar.BackColor := value;
 end;
 
-procedure TForm4.SetFillColor(Value: TColor);
+procedure TViewIconsForm.SetFillColor(Value: TColor);
 begin
   fFillColor := Value;
   fList.FillColor := fFillColor;
@@ -593,7 +591,7 @@ begin
   ControlList1.Invalidate;
 end;
 
-procedure TForm4.SetList(Value: ISVGIconList);
+procedure TViewIconsForm.SetList(Value: ISVGIconList);
 var
   SearchList : ISVGSearchList;
 begin
@@ -603,7 +601,7 @@ begin
     fList := Value;
 end;
 
-procedure TForm4.SetToneColor(Value: TColor);
+procedure TViewIconsForm.SetToneColor(Value: TColor);
 var
   iconTone : ISVGTwoToneIconList;
 begin
@@ -615,7 +613,7 @@ begin
   ControlList1.invalidate;
 end;
 
-procedure TForm4.ClickBackColor(Sender: TObject);
+procedure TViewIconsForm.ClickBackColor(Sender: TObject);
 begin
   dlgColor.color := ControlList1.Color;
   dlgColor.Tag := 0;
@@ -626,51 +624,22 @@ begin
     end;
 end;
 
-procedure TForm4.svgFilledClick(Sender: TObject);
+procedure TViewIconsForm.svgFilledClick(Sender: TObject);
 begin
   SelectFilled;
 end;
 
-procedure TForm4.svgRegularClick(Sender: TObject);
+procedure TViewIconsForm.svgRegularClick(Sender: TObject);
 begin
   SelectRegular;
 end;
 
-procedure TForm4.svgTwoToneClick(Sender: TObject);
+procedure TViewIconsForm.svgTwoToneClick(Sender: TObject);
 begin
   SelectTwoTone;
 end;
 
-procedure TForm4.UpdateColorSvg(aSvg: TSkSvg; aColor: TColor);
-var
-  sColor : string;
-begin
-  if aColor = clNone then
-    begin
-      asvg.svg.source :=
-      '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">'+
-      StringReplace(C_FluentUI_Presence_Tentative_Regular_20,
-       ' fill="#212121"',' fill="black" opacity="0.3"',[rfReplaceAll])+
-      StringReplace(C_FluentUI_Presence_Unknown_Regular_20,
-        ' fill="#212121"',' fill="black"',[rfReplaceAll])+
-      '</svg>';
-    end
-  else
-    begin
-      sColor := ColorToWebColorStr(aColor);
-      asvg.svg.source :=
-      '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">'+
-      StringReplace(C_FluentUI_Presence_Busy_Filled_20,
-           ' fill="#212121"',' fill="'+sColor+'"',[rfReplaceAll])+
-      StringReplace(C_FluentUI_Presence_Unknown_Regular_20,
-        ' fill="#212121"',' fill="black"',[rfReplaceAll])+
-      '</svg>';
-
-    end;
-
-end;
-
-procedure TForm4.Updatelist;
+procedure TViewIconsForm.Updatelist;
 begin
   lblAvailableIconCount.caption := IntToSTr(fList.Count);
   ControlList1.Itemindex := -1;

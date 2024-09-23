@@ -94,7 +94,6 @@ procedure TGenerateImageCollection.RenderToImageData(aItem:TImageCollectionItem;
 var
   LBitmap : TBitmap;
   pngImg : TWICImage;
-  ix : integer;
   Image : TImageCollectionSourceItem;
 begin
   LBitmap := TBitmap.Create;

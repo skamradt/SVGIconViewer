@@ -1,4 +1,4 @@
-object Form4: TForm4
+object ViewIconsForm: TViewIconsForm
   Left = 0
   Top = 0
   Caption = 'SVG Icon Viewer'
@@ -376,7 +376,6 @@ object Form4: TForm4
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
-    ExplicitLeft = -2
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
