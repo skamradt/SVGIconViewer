@@ -308,26 +308,26 @@ procedure TRightToolbarController.SetVisibleButtons;
 var
   btns : TArray<TRightMainToolbarButtons>;
 begin
+  // The list is right to left to make it easier to handle high dpi without
+  // having to worry about positioning the control and avoids messy scrollbar
+  // problems.
   SetLength(fItemArray,3);
-  fItemArray[0] := btnFillColor;
+  fItemArray[2] := btnFillColor;
   fItemArray[1] := btnBackColor;
-  fItemArray[2] := btnSettings;
+  fItemArray[0] := btnSettings;
   if fToneVisible then
     begin
       SetLength(Btns,1);
       btns[0] := btnToneColor;
-      Insert(btns,fItemArray,1);
+      Insert(btns,fItemArray,2);
     end;
   if fCopyCodeVisible then
     begin
       SetLength(Btns,1);
       btns[0] := btnCopyCode;
-      Insert(btns,fItemArray,Length(fItemArray)-1);
+      Insert(btns,fItemArray,1);
     end;
-  // grow the list to maximum first so it won't flash the scrollbar
-  fControlList.Width := 5 * (fControlList.itemwidth + 4);
   fControlList.ItemCount := Length(fItemArray);
-  fControlList.Width := fControlList.ItemCount * (fControlList.itemwidth + 4);
   fControlList.Invalidate;
 end;
 

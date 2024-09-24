@@ -37,7 +37,7 @@ object ViewIconsForm: TViewIconsForm
       ExplicitLeft = 51
     end
     object pnlSearchInfo: TPanel
-      Left = 188
+      Left = 198
       Top = 0
       Width = 151
       Height = 45
@@ -46,6 +46,7 @@ object ViewIconsForm: TViewIconsForm
       Caption = 'pnlSearchInfo'
       ShowCaption = False
       TabOrder = 0
+      ExplicitLeft = 188
       object lblAvailableIconCount: TLabel
         Left = 105
         Top = -1
@@ -76,10 +77,11 @@ object ViewIconsForm: TViewIconsForm
       end
       object Shape1: TShape
         AlignWithMargins = True
-        Left = 3
+        Left = 0
         Top = 3
         Width = 2
         Height = 39
+        Margins.Left = 0
         Align = alLeft
         Pen.Color = clSilver
         ExplicitLeft = 219
@@ -106,12 +108,13 @@ object ViewIconsForm: TViewIconsForm
     end
     object lstRightToolbar: TControlList
       AlignWithMargins = True
-      Left = 561
+      Left = 525
       Top = 3
-      Width = 220
+      Width = 256
       Height = 40
       Margins.Bottom = 2
       Align = alRight
+      BiDiMode = bdRightToLeft
       BorderStyle = bsNone
       Color = clBtnFace
       ItemCount = 5
@@ -122,10 +125,12 @@ object ViewIconsForm: TViewIconsForm
       ItemMargins.Right = 2
       ItemMargins.Bottom = 0
       ColumnLayout = cltMultiLeftToRight
+      ParentBiDiMode = False
       ParentColor = False
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
+      ExplicitLeft = 528
       object shpRBtnBorder: TShape
         Left = 0
         Top = 0
@@ -196,7 +201,7 @@ object ViewIconsForm: TViewIconsForm
       AlignWithMargins = True
       Left = 55
       Top = 3
-      Width = 132
+      Width = 142
       Height = 40
       Margins.Left = 1
       Margins.Right = 1
