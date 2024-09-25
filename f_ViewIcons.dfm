@@ -46,7 +46,6 @@ object ViewIconsForm: TViewIconsForm
       Caption = 'pnlSearchInfo'
       ShowCaption = False
       TabOrder = 0
-      ExplicitLeft = 188
       object lblAvailableIconCount: TLabel
         Left = 105
         Top = -1
@@ -130,7 +129,6 @@ object ViewIconsForm: TViewIconsForm
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
-      ExplicitLeft = 528
       object shpRBtnBorder: TShape
         Left = 0
         Top = 0
@@ -1281,7 +1279,9 @@ object ViewIconsForm: TViewIconsForm
     Top = 208
   end
   object pmFill: TPopupMenu
+    BiDiMode = bdLeftToRight
     Images = VirtualImageList1
+    ParentBiDiMode = False
     Left = 112
     Top = 64
     object pmSelectFillNone: TMenuItem

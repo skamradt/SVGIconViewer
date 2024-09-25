@@ -137,7 +137,7 @@ procedure TViewIconsForm.ClickFillColor(Sender: TObject);
 var
   pt : TPoint;
 begin
-  Pt := ClientToScreen(Point(lstRightToolbar.left,lstRightToolbar.Top+lstRightToolbar.height-2));
+  Pt := ClientToScreen(Point(lstRightToolbar.left+lstRightToolbar.GetItemRect(lstRightToolbar.ItemIndex).Left,lstRightToolbar.Top+lstRightToolbar.height-2));
   pmFill.Popup(pt.X,pt.Y);
 end;
 
