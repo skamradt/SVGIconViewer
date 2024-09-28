@@ -177,16 +177,14 @@ object ViewIconsForm: TViewIconsForm
         AlignWithMargins = True
         Left = 3
         Top = 22
-        Width = 34
-        Height = 18
+        Width = 15
+        Height = 15
         Margins.Top = 1
         Margins.Bottom = 0
         Align = alClient
         Alignment = taCenter
         Caption = 'Fill'
         PopupMenu = pmFill
-        ExplicitWidth = 15
-        ExplicitHeight = 15
       end
       object svgRightIcon: TSkSvg
         Left = 3

@@ -235,6 +235,7 @@
         <DCCReference Include="IconLibrary\svgIcons.BootstrapOutline16.source.pas"/>
         <DCCReference Include="IconCollections\IconCollections.Bootstrap.pas"/>
         <DCCReference Include="IconLibrary\svgIcons.BootstrapTwoTone.pas"/>
+        <DCCReference Include="IconLibrary\svgIcons.TablerTwoTone.pas"/>
         <None Include="README.md"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

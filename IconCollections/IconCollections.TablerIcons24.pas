@@ -24,7 +24,7 @@ uses
   System.Sysutils,
   svgIcons.TablerFilled24,
   svgIcons.TablerOutline24,
-  svgIcons.FluentUITwoTone;
+  svgIcons.TablerTwoTone;
 
 { TTablerIcons24 }
 
@@ -51,7 +51,7 @@ begin
   case ListType of
     ltOutline : Result := TTablerOutline24IconList.create(fStrokeWidth);
     ltFilled : Result := TTablerFilled24IconList.create;
-    ltTwoTone : Result := TFluentUITwoToneIconList.Create(TTablerFilled24IconList.create,TTablerOutline24IconList.create);
+    ltTwoTone : Result := TTablerTwoToneIconList.Create(TTablerFilled24IconList.create,TTablerOutline24IconList.create);
   end;
 end;
 
