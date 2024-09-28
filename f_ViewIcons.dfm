@@ -3,10 +3,10 @@ object ViewIconsForm: TViewIconsForm
   Top = 0
   Caption = 'SVG Icon Viewer'
   ClientHeight = 553
-  ClientWidth = 784
+  ClientWidth = 681
   Color = clBtnFace
   Constraints.MinHeight = 214
-  Constraints.MinWidth = 580
+  Constraints.MinWidth = 640
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -18,7 +18,7 @@ object ViewIconsForm: TViewIconsForm
   object pnlToolbar: TPanel
     Left = 0
     Top = 0
-    Width = 784
+    Width = 681
     Height = 45
     Margins.Top = 0
     Align = alTop
@@ -26,6 +26,7 @@ object ViewIconsForm: TViewIconsForm
     Caption = 'pnlToolbar'
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 784
     object Shape3: TShape
       AlignWithMargins = True
       Left = 49
@@ -107,7 +108,7 @@ object ViewIconsForm: TViewIconsForm
     end
     object lstRightToolbar: TControlList
       AlignWithMargins = True
-      Left = 525
+      Left = 422
       Top = 3
       Width = 256
       Height = 40
@@ -129,6 +130,7 @@ object ViewIconsForm: TViewIconsForm
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
+      ExplicitLeft = 525
       object shpRBtnBorder: TShape
         Left = 0
         Top = 0
@@ -177,14 +179,16 @@ object ViewIconsForm: TViewIconsForm
         AlignWithMargins = True
         Left = 3
         Top = 22
-        Width = 15
-        Height = 15
+        Width = 34
+        Height = 18
         Margins.Top = 1
         Margins.Bottom = 0
         Align = alClient
         Alignment = taCenter
         Caption = 'Fill'
         PopupMenu = pmFill
+        ExplicitWidth = 15
+        ExplicitHeight = 15
       end
       object svgRightIcon: TSkSvg
         Left = 3
@@ -356,7 +360,7 @@ object ViewIconsForm: TViewIconsForm
     AlignWithMargins = True
     Left = 3
     Top = 48
-    Width = 778
+    Width = 675
     Height = 483
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -377,6 +381,7 @@ object ViewIconsForm: TViewIconsForm
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
+    ExplicitWidth = 778
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
@@ -393,10 +398,11 @@ object ViewIconsForm: TViewIconsForm
   object StatusBar1: TStatusBar
     Left = 0
     Top = 534
-    Width = 784
+    Width = 681
     Height = 19
     Panels = <>
     SimplePanel = True
+    ExplicitWidth = 784
   end
   object dlgColor: TColorDialog
     OnShow = dlgColorShow
