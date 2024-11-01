@@ -42,6 +42,7 @@ The Icons along the top are
 | ![filled](./images/iconfilled.svg) | When pressed will show the filled icon subset in the collection |
 | ![twotone](./images/icontwotone.svg) | When pressed will show the generated twotone icon subset in the collection based on icons which match in name in both the outline and filled subsets. |
 | Fill, Tone, Back | These buttons, when pressed will allow selecting the color for the appropriate section. Fill is either the stroke color for outline/twotone and the fill color for solid icons. Tone is the fill color for solid icons rendered in twotone mode.  Back is the UI background color and is not stored in the SVG or PNG which will have a transparent background. |
+| ![license](./images/license.svg) | Only available when a icon library collection is selected. When pressed will display the license for the current icon library collection. |
 | ![generate](./images/icongeneratecomponent.svg) | Only available when a user directory is selected from the library.  This button will generate a TImageCollection containing all images in the current directory as PNG files with the size specified from the config screen. |
 | ![config](./images/iconsettings.svg) | When pressed will display some options available to the program. |
 
