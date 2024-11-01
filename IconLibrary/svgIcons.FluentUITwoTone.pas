@@ -99,7 +99,7 @@ end;
 
 function TFluentUITwoToneIconList.GetName(Index: Integer): string;
 begin
-  Result := fFilledList.name[fMapping[index].FilledIdx];
+  Result := fOutlineList.name[fMapping[index].OutlineIdx];
 end;
 
 function TFluentUITwoToneIconList.GetSource(Index: Integer): string;

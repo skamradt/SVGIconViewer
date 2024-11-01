@@ -101,6 +101,7 @@ type
     procedure Updatelist;
     procedure SetList(Value:ISVGIconList);
     procedure SelectCollection(Sender:TObject);
+    procedure ClickShowLicense(Sender: TObject);
     procedure CountAllIcons;
   public
     { Public declarations }
@@ -121,6 +122,7 @@ uses
   f_ViewIconsConfig,
   System.Types,
   svgIcon.Utils,
+  svgViewer.ShowLicenseDialog,
   svgViewer.IconLibrary,
   svgViewer.Icons.Search,
   svgViewer.GenerateImageCollection,
@@ -181,6 +183,18 @@ begin
           end;
 
       end;
+  finally
+    dlg.free;
+  end;
+end;
+
+procedure TViewIconsForm.ClickShowLicense(Sender: TObject);
+var
+  dlg : TShowLicenseDlg;
+begin
+  dlg := TShowLicenseDlg.create(Self);
+  try
+    dlg.execute(fCollection.GetLicense);
   finally
     dlg.free;
   end;
@@ -266,6 +280,7 @@ begin
   fRightToolbar.ButtonEvents[btnBackColor] := ClickBackColor;
   fRightToolbar.ButtonEvents[btnCopyCode] := ClickGenerateCollection;
   fRightToolbar.ButtonEvents[btnSettings] := ClickSettings;
+  fRightToolbar.ButtonEvents[btnLicense] := ClickShowLicense;
   SelectCollection(nil);
   SetFillColor(fSettings.GetOptionColorDefault('fillcolor',clNone));
   SetToneColor(fSettings.GetOptionColorDefault('tonecolor',clSilver));

@@ -191,7 +191,7 @@ end;
 
 function TBootstrapTwoToneIconList.GetName(Index: Integer): string;
 begin
-  Result := fFilledList.name[fMapping[index].FilledIdx];
+  Result := fOutlineList.name[fMapping[index].OutlineIdx];
 end;
 
 function TBootstrapTwoToneIconList.GetSource(Index: Integer): string;

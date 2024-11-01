@@ -12,12 +12,14 @@ type
     Function GetBaseSize : integer;
     Function GetTypesAvailable : TSVGIconListTypes;
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
+    Function GetLicense : String;
   end;
 
 implementation
 
 uses
   System.Sysutils,
+  svgViewer.Consts,
   svgIcons.BootstrapOutline16,
   svgIcons.BootstrapFilled16,
   svgIcons.BootstrapTwoTone;
@@ -32,6 +34,11 @@ end;
 function TBootstrapIcons16.GetLibraryName: string;
 begin
   Result := 'Bootstrap 16';
+end;
+
+function TBootstrapIcons16.GetLicense: String;
+begin
+  result := StringReplace(C_MIT_LICENSE,'{copyright}','Copyright (c) 2011-2024 The Bootstrap Authors',[rfReplaceAll,rfIgnoreCase]);
 end;
 
 function TBootstrapIcons16.GetList(ListType: TSVGIconListType): ISVGIconList;

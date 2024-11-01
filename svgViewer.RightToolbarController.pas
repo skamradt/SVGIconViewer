@@ -74,6 +74,18 @@ uses
 
 {$REGION 'SVG Icon Constants'}
 const
+  C_LICENSE =
+    '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 2C4.89543 2 4 2.89539 '+
+    '4 3.99991V9.12571C4.31962 9.04345 4.6547 8.9997 5 8.9997V3.99991C5 3.44765 5.44772 2.99996 6 '+
+    '2.99996H10V6.49981C10 7.3282 10.6716 7.99974 11.5 7.99974H15V15.9994C15 16.5517 14.5523 16.9994 '+
+    '14 16.9994H8V17.9993H14C15.1046 17.9993 16 17.1039 16 15.9994V7.41398C16 7.01617 15.842 6.63466 '+
+    '15.5607 6.35337L11.6464 2.43932C11.3651 2.15803 10.9836 2 10.5858 2H6ZM14.7929 6.99979H11.5C11.2239 '+
+    '6.99979 11 6.77594 11 6.49981V3.20706L14.7929 6.99979ZM8 12.9995C8 14.6563 6.65685 15.9994 '+
+    '5 15.9994C3.34315 15.9994 2 14.6563 2 12.9995C2 11.3427 3.34315 9.99966 5 9.99966C6.65685 9.99966 '+
+    '8 11.3427 8 12.9995ZM7 16.4643C6.41165 16.8046 5.72857 16.9994 5 16.9994C4.27143 16.9994 3.58835 '+
+    '16.8046 3 16.4643V18.7496C3 18.9435 3.21119 19.0636 3.37783 18.9645L5 17.9993L6.62217 18.9645C6.78881 '+
+    '19.0636 7 18.9435 7 18.7496V16.4643Z"/></svg>';
+
   C_COPY_CODE =
     '<svg xmlns="http://www.w3.org/2000/svg" fill="#000" role="img" version="1.1" viewBox="0 0 24 24"><path '+
     'd="M14.152 2.64c.426 0 .845.027 1.258.08l-.604 1.12-1.116 2.072-.757 1.414c-.027.05-.056.07-.114.067-'+
@@ -162,7 +174,7 @@ begin
   fControlList.OnItemClick := onItemClick;
   fToneVisible := false;
   fCopyCodeVisible := false;
-  SetLength(fItemEvents,5);
+  SetLength(fItemEvents,6);
   SetVisibleButtons;
 end;
 
@@ -206,6 +218,7 @@ begin
     btnBackColor : RenderBackIcon;
     btnCopyCode : RenderStandardIcon(C_COPY_CODE);
     btnSettings : RenderStandardIcon(C_SETTINGS);
+    btnLicense : RenderStandardIcon(C_LICENSE);
   end;
   // note this is not yet used, hints are turned off as they do not yet
   // behave properly as the user changes from one item to another.
@@ -217,6 +230,7 @@ begin
         btnBackColor : fControlList.hint := 'Background color';
         btnCopyCode : fControlList.hint := 'Copy to Delphi Controls';
         btnSettings : fControlList.hint := 'Settings';
+        btnLicense : fControlList.Hint := 'Display license for select icon set';
       end;
     end;
 end;
@@ -315,16 +329,23 @@ begin
   fItemArray[2] := btnFillColor;
   fItemArray[1] := btnBackColor;
   fItemArray[0] := btnSettings;
+
   if fToneVisible then
     begin
       SetLength(Btns,1);
       btns[0] := btnToneColor;
-      Insert(btns,fItemArray,2);
+      Insert(btns,fItemArray,Length(fItemArray)-1);
     end;
   if fCopyCodeVisible then
     begin
       SetLength(Btns,1);
       btns[0] := btnCopyCode;
+      Insert(btns,fItemArray,1);
+    end
+  else
+    begin
+      SetLength(Btns,1);
+      btns[0] := btnLicense;
       Insert(btns,fItemArray,1);
     end;
   fControlList.ItemCount := Length(fItemArray);

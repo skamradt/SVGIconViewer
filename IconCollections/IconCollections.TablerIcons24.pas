@@ -1,4 +1,4 @@
-unit IconCollections.TablerIcons24;
+﻿unit IconCollections.TablerIcons24;
 
 interface
 
@@ -14,6 +14,7 @@ type
     Function GetBaseSize : integer;
     Function GetTypesAvailable : TSVGIconListTypes;
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
+    Function GetLicense : String;
   public
     constructor Create(aStrokeWidth:Double);
   end;
@@ -22,6 +23,7 @@ implementation
 
 uses
   System.Sysutils,
+  svgViewer.Consts,
   svgIcons.TablerFilled24,
   svgIcons.TablerOutline24,
   svgIcons.TablerTwoTone;
@@ -44,6 +46,11 @@ begin
   Result := 'Tabler-Icons 24';
   if fStrokeWidth <> 2.0 then
     Result := REsult + ' Stroke '+FloatToSTr(fStrokeWidth);
+end;
+
+function TTablerIcons24.GetLicense: String;
+begin
+  result := StringReplace(C_MIT_LICENSE,'{copyright}','Copyright (c) 2020-2024 Paweł Kuna',[rfReplaceAll,rfIgnoreCase]);
 end;
 
 function TTablerIcons24.GetList(ListType: TSVGIconListType): ISVGIconList;

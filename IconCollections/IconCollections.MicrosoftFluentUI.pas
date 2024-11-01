@@ -19,14 +19,17 @@ type
     Function GetBaseSize : integer;
     Function GetTypesAvailable : TSVGIconListTypes;
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
+    function GetLicense: string;
   public
     constructor Create(aSize:Integer;aOutline,aFilled:TInterfacedObjectClass);
+
   end;
 
 implementation
 
 uses
   System.SysUtils,
+  svgViewer.Consts,
   svgIcons.FluentUITwoTone;
 
 { TMicrosoftFluentUI }
@@ -48,6 +51,11 @@ end;
 function TMicrosoftFluentUI.GetLibraryName: string;
 begin
   Result := 'Microsoft FluentUI '+IntToStr(fSize);;
+end;
+
+function TMicrosoftFluentUI.GetLicense: string;
+begin
+  result := StringReplace(C_MIT_LICENSE,'{copyright}','Copyright (c) 2020 Microsoft Corporation',[rfReplaceAll,rfIgnoreCase]);
 end;
 
 function TMicrosoftFluentUI.GetList(ListType: TSVGIconListType): ISVGIconList;

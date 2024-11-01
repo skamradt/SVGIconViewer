@@ -10,7 +10,7 @@ type
   TSVGIconListType = (ltOutline,ltFilled,ltTwoTone);
   TSVGIconListTypes = set of TSVGIConListType;
 
-  TRightMainToolbarButtons = (btnFillColor,btnToneColor,btnBackColor,btnCopyCode,btnSettings);
+  TRightMainToolbarButtons = (btnFillColor,btnToneColor,btnBackColor,btnCopyCode,btnSettings,btnLicense);
 
 
   ISVGViewerRightToolbar = interface
@@ -79,6 +79,7 @@ type
     Function GetLibraryName : string;
     Function GetTypesAvailable : TSVGIconListTypes;
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
+    Function GetLicense : String;
     property Name : string read GetLibraryName;
     property Available : TSVGIconListTypes read GetTypesAvailable;
     property List[index:TSVGIconListType] : ISVGIconList read GetList;

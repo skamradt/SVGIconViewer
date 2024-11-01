@@ -58,8 +58,11 @@ const
   // FillExceptionsA contains the fill names that are out of order from
   // the standard processor.  fName = !name in this case to trigger the
   // special exception lookup.
-  FillExceptionsA : Array[0..3] of String = ('briefcase_2','crop_7_5','shield','square');
-  Corrections : Array[0..16] of rCorrection = (
+  FillExceptionsA : Array[0..8] of String = (
+      'box_multiple','briefcase_2','circle','crop_5_4','crop_7_5','rectangle',
+      'rectangle_vertical','shield','square'
+    );
+  Corrections : Array[0..66] of rCorrection = (
     ( oName:'align_box_bottom_center'; fName:'square' ),
     ( oName:'align_box_bottom_left'; fName:'square' ),
     ( oName:'align_box_bottom_right'; fName:'square' ),
@@ -74,10 +77,65 @@ const
     ( oName:'align_box_top_left'; fName:'square' ),
     ( oName:'align_box_top_right'; fName:'square' ),
     ( oName:'aspect_ratio'; fName: 'crop_7_5' ),
+    ( oName:'box_model'; fName: 'crop_7_5' ),
+    ( oName:'box_model_2'; fName: 'crop_7_5' ),
+    ( oName:'box_multiple_0'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_1'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_2'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_3'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_4'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_5'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_6'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_7'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_8'; fName: 'box_multiple' ),
+    ( oName:'box_multiple_9'; fName: 'box_multiple' ),
+    ( oName:'brand_mastercard'; Fname:'rectangle'),
     ( oName:'briefcase'; fName: 'briefcase_2' ),
+    ( oName:'browser'; fName: 'crop_7_5' ),
+    ( oName:'browser_check'; fName: 'crop_7_5' ),
+    ( oName:'browser_plus'; fName: 'crop_7_5' ),
+    ( oName:'browser_x'; fName: 'crop_7_5' ),
+    ( oName:'calendar'; fName: 'crop_5_4' ),
+    ( oName:'calendar_due'; fName: 'crop_5_4' ),
+    ( oName:'calendar_event'; fName: 'crop_5_4' ),
+    ( oName:'calendar_month'; fName: 'crop_5_4' ),
+    ( oName:'calendar_sad'; fName: 'crop_5_4' ),
+    ( oName:'calendar_smile'; fName: 'crop_5_4' ),
+    ( oName:'calendar_week'; fName: 'crop_5_4' ),
+
+    ( oName:'circle_chevron_down'; fName: 'circle' ),
+    ( oName:'circle_chevron_left'; fName: 'circle' ),
+    ( oName:'circle_chevron_right'; fName: 'circle' ),
+    ( oName:'circle_chevron_up'; fName: 'circle' ),
+    ( oName:'circle_chevrons_down'; fName: 'circle' ),
+    ( oName:'circle_chevrons_left'; fName: 'circle' ),
+    ( oName:'circle_chevrons_right'; fName: 'circle' ),
+    ( oName:'circle_chevrons_up'; fName: 'circle' ),
+
+
     ( oName:'credit_card'; fName:'crop_7_5'),
-    ( oName:'shield_checkered'; fName: 'shield')
+    ( oName:'inbox'; fName: 'crop_7_5'),
+    ( oName:'play_card'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_1'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_10'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_2'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_3'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_4'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_5'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_6'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_7'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_8'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_9'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_a'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_j'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_k'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_q'; Fname:'rectangle_vertical'),
+    ( oName:'play_card_star'; Fname:'rectangle_vertical'),
+    ( oName:'shield_checkered'; fName: 'shield'),
+    ( oName:'user_circle'; fName: 'circle')
     );
+
+
 
 { TTablerTwoToneIconList }
 
@@ -141,14 +199,26 @@ begin
             end;
           inc(iFidx);
           inc(iOidx);
-          Inc(iMap)
+          Inc(iMap);
         end
       else if Cmp < 0 then
         begin
           inc(iFidx);
         end
       else
-        inc(iOidx);
+        begin
+          if (Cidx < Length(Corrections)) then
+            begin
+              if SameText(fOutlineList.Name[ioidx],Corrections[CIdx].Oname) then
+                begin
+                  fMapping[iMap].OutlineIdx := ioIdx;
+                  CorrectionsList[cidx] := imap;
+                  Inc(iMap);
+                  Inc(CIdx);
+                end;
+            end;
+          inc(iOidx);
+        end;
     end;
   for cidx := Low(Corrections) to High(Corrections) do
     begin
@@ -170,7 +240,7 @@ end;
 
 function TTablerTwoToneIconList.GetName(Index: Integer): string;
 begin
-  Result := fFilledList.name[fMapping[index].FilledIdx];
+  Result := fOutlineList.name[fMapping[index].OutlineIdx];
 end;
 
 function TTablerTwoToneIconList.GetSource(Index: Integer): string;
@@ -181,7 +251,6 @@ begin
   delete(lFilled,1,pos('>',lFilled));
   lFilled := StringReplace(lFilled,'</svg>','',[rfReplaceAll,rfIgnoreCase]);
   lOutline := fOutlinelist.Source[fMapping[index].OutlineIdx];
-  // grab the header from the outline source
   lsvgHeader := leftStr( lOutline, pos('>',lOutline));
   delete(lOutline,1,length(lsvgHeader));
   result := lSVGHeader + lFilled + lOutline;

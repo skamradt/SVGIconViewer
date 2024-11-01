@@ -114,7 +114,6 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>$(ProjectName).Artwork\Windows\AppIcon.ico</Icon_MainIcon>
         <Debugger_RunParams>-count</Debugger_RunParams>
     </PropertyGroup>
@@ -236,6 +235,11 @@
         <DCCReference Include="IconCollections\IconCollections.Bootstrap.pas"/>
         <DCCReference Include="IconLibrary\svgIcons.BootstrapTwoTone.pas"/>
         <DCCReference Include="IconLibrary\svgIcons.TablerTwoTone.pas"/>
+        <DCCReference Include="svgViewer.Consts.pas"/>
+        <DCCReference Include="svgViewer.ShowLicenseDialog.pas">
+            <Form>ShowLicenseDlg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="README.md"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

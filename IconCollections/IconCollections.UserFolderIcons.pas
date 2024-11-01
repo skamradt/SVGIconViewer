@@ -18,8 +18,10 @@ type
     Function GetList(ListType:TSVGIconListType) : ISVGIconList;
     procedure SetDirectory(value:String);
     function GetDirectory:string;
+    function GetLicense: string;
   public
     constructor Create(const aFolder:String);
+
   end;
 
 implementation
@@ -44,6 +46,11 @@ end;
 function TUserFolderIcons.GetLibraryName: string;
 begin
   Result := 'User Library Folder';
+end;
+
+function TUserFolderIcons.GetLicense: string;
+begin
+  result := '';
 end;
 
 function TUserFolderIcons.GetList(ListType: TSVGIconListType): ISVGIconList;

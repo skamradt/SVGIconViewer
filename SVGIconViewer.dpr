@@ -94,7 +94,9 @@ uses
   svgIcons.BootstrapOutline16.source in 'IconLibrary\svgIcons.BootstrapOutline16.source.pas',
   IconCollections.Bootstrap in 'IconCollections\IconCollections.Bootstrap.pas',
   svgIcons.BootstrapTwoTone in 'IconLibrary\svgIcons.BootstrapTwoTone.pas',
-  svgIcons.TablerTwoTone in 'IconLibrary\svgIcons.TablerTwoTone.pas';
+  svgIcons.TablerTwoTone in 'IconLibrary\svgIcons.TablerTwoTone.pas',
+  svgViewer.Consts in 'svgViewer.Consts.pas',
+  svgViewer.ShowLicenseDialog in 'svgViewer.ShowLicenseDialog.pas' {ShowLicenseDlg};
 
 {$R *.res}
 
