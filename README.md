@@ -66,7 +66,7 @@ November 1, 2024 - 1.4
 * Updated Tabler-icon library to 3.21.0
 * Added new toolbar option to display the license for the selected icon set
 * Corrected issue where corrected two-tone icons would not show up in search
-* Applied several more two-tone correctiosn to the Tabler-Icon library
+* Applied several more two-tone corrections to the Tabler-Icon library
 
 September 28, 2024 - 1.3
 * Updated Tabler-icon library to 3.19.0
