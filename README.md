@@ -1,8 +1,8 @@
-# SVGIconViewer v1.41
+# SVGIconViewer v1.4.1
 
-![Picture of application UI](./images/Screenshot_2025-05-22_235615.png "Screen Capture")
+![Picture of application UI](./images/Screenshot_2024-12-26_130615.png "Screen Capture")
 
-A simple windows based viewer containing over 47,710 individual SVG icons with the ability to copy
+A simple windows based viewer containing over 47,300 individual SVG icons with the ability to copy
 and export individual icons for use in other projects.  Two-tone ability was added
 to render icons using both the outline and filled versions where there is a match.
 
@@ -63,9 +63,9 @@ component released in Delphi 10.4.2 as well as the [Skia4Delphi](https://docwiki
 Because the program makes heavy use of multi-line string constants, the project requires Delphi 12.0 or better to build.
 
 ## Release History
-May 22, 2025 - 1.41
-* Updated Tabler-icon library to 3.33.0
-* Built with Delphi 12.3
+December 26, 2024 - 1.4.1
+* Updated Tabler-icon library to 3.26.0
+* Corrected issue where license option was requiring an additional 3rd party library which was not necessary.
 
 November 1, 2024 - 1.4
 * Updated Tabler-icon library to 3.21.0

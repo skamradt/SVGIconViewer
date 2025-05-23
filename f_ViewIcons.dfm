@@ -26,6 +26,7 @@ object ViewIconsForm: TViewIconsForm
     Caption = 'pnlToolbar'
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 679
     object Shape3: TShape
       AlignWithMargins = True
       Left = 49
@@ -129,6 +130,7 @@ object ViewIconsForm: TViewIconsForm
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
+      ExplicitLeft = 420
       object shpRBtnBorder: TShape
         Left = 0
         Top = 0
@@ -379,6 +381,8 @@ object ViewIconsForm: TViewIconsForm
     TabOrder = 1
     OnBeforeDrawItem = ControlList1BeforeDrawItem
     OnItemClick = ControlList1ItemClick
+    ExplicitWidth = 673
+    ExplicitHeight = 475
     object svgIcon: TSkSvg
       AlignWithMargins = True
       Left = 3
@@ -399,6 +403,8 @@ object ViewIconsForm: TViewIconsForm
     Height = 19
     Panels = <>
     SimplePanel = True
+    ExplicitTop = 526
+    ExplicitWidth = 679
   end
   object dlgColor: TColorDialog
     OnShow = dlgColorShow

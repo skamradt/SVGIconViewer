@@ -11,25 +11,14 @@ object ShowLicenseDlg: TShowLicenseDlg
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poOwnerFormCenter
+  Position = poMainFormCenter
   TextHeight = 15
-  object btns1: TRzDialogButtons
-    Left = 0
-    Top = 426
-    Width = 674
-    HotTrack = True
-    ShowCancelButton = False
-    TabOrder = 0
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitWidth = 185
-  end
   object mmoLicense: TMemo
     AlignWithMargins = True
     Left = 3
     Top = 3
     Width = 668
-    Height = 420
+    Height = 419
     Align = alClient
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -85,7 +74,30 @@ object ShowLicenseDlg: TShowLicenseDlg
     ParentFont = False
     ReadOnly = True
     ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 425
+    Width = 674
+    Height = 37
+    Align = alBottom
+    BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 660
+    ExplicitTop = 421
+    DesignSize = (
+      674
+      37)
+    object Button1: TButton
+      Left = 596
+      Top = 3
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
   end
 end
