@@ -62,6 +62,16 @@ This project makes use of the [TControlList](https://docwiki.embarcadero.com/RAD
 component released in Delphi 10.4.2 as well as the [Skia4Delphi](https://docwiki.embarcadero.com/RADStudio/Athens/en/Skia4Delphi) released with Delphi 12.
 Because the program makes heavy use of multi-line string constants, the project requires Delphi 12.0 or better to build.
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=skamradt%2FSVGIconViewer&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=skamradt/SVGIconViewer&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=skamradt/SVGIconViewer&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=skamradt/SVGIconViewer&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## Release History
 May 23, 2025 - 1.4.2
 * Updated Tabler-icon library to 3.33.0
